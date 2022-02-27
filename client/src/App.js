@@ -1,12 +1,13 @@
-import './App.css';
-import {Routes, Route } from 'react-router-dom';
+import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import { Routines } from "./Components";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <Routes>
-          <Route path="/" />
+          <Route path="/routines" element={<Routines />} />
         </Routes>
       </header>
     </div>

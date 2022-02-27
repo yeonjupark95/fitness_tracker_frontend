@@ -2,17 +2,18 @@ const BASE_URL = "https://secret-fjord-65669.herokuapp.com/api";
 
 export const fetchRoutines = async (token) => {
   try {
-    let response;
-    if (token) {
-      response = await fetch(`${BASE_URL}/routines`, {
-        headers: {
-          "Content-Type": "applicaton/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-    } else {
-      response = await fetch(`${BASE_URL}/routines`);
-    }
+    const response = await fetch(`${BASE_URL}/routines`);
+    // let response;
+    // if (token) {
+    //   response = await fetch(`${BASE_URL}/routines`, {
+    //     headers: {
+    //       "Content-Type": "applicaton/json",
+    //       Authorization: `Bearer ${token}`,
+    //     },
+    //   });
+    // } else {
+    //   response = await fetch(`${BASE_URL}/routines`);
+    // }
     const {
       data: { routines },
     } = await response.json();
