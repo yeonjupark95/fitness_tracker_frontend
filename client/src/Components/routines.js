@@ -19,7 +19,8 @@ const Routines = () => {
 
   return (
     <div className="routines-wrapper">
-      {routines.length > 0 &&
+      {routines.length ? (
+        routines.length > 0 &&
         routines.map(({ id, creatorId, name, goal, creatorName }) => {
           return (
             <div className="routines" key={id}>
@@ -28,7 +29,10 @@ const Routines = () => {
               {creatorName}
             </div>
           );
-        })}
+        })
+      ) : (
+        <h5>No routines to display</h5>
+      )}
     </div>
   );
 };
