@@ -1,3 +1,4 @@
+import axios from "axios";
 const BASE_URL = "https://secret-fjord-65669.herokuapp.com/api/";
 
 export const callApi = async ({ url, method, token, body }) => {
@@ -23,18 +24,17 @@ export const callApi = async ({ url, method, token, body }) => {
 
 export const fetchRoutines = async (token) => {
   try {
-    const response = await fetch(`${BASE_URL}/routines`);
-    // let response;
-    // if (token) {
-    //   response = await fetch(`${BASE_URL}/routines`, {
-    //     headers: {
-    //       "Content-Type": "applicaton/json",
-    //       Authorization: `Bearer ${token}`,
-    //     },
-    //   });
-    // } else {
-    //   response = await fetch(`${BASE_URL}/routines`);
-    // }
+    let response;
+    if (token) {
+      response = await fetch(`${BASE_URL}/routines`, {
+        headers: {
+          "Content-Type": "applicaton/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+    } else {
+      response = await fetch(`${BASE_URL}/routines`);
+    }
     const {
       data: { routines },
     } = await response.json();
@@ -42,6 +42,8 @@ export const fetchRoutines = async (token) => {
   } catch (error) {
     console.error(error);
   }
+  // const {response} = await axios.get(`${BASE_URL}/routines`);
+  // return response;
 };
 
 export const fetchActivities = async (token) => {
