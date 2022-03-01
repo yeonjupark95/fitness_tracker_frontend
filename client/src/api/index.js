@@ -35,10 +35,8 @@ export const fetchRoutines = async (token) => {
     } else {
       response = await fetch(`${BASE_URL}/routines`);
     }
-    const {
-      data: { routines },
-    } = await response.json();
-    return routines;
+    const routines = await response.json();
+    return routines
   } catch (error) {
     console.error(error);
   }
