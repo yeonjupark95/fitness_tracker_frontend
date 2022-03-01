@@ -36,7 +36,7 @@ export const fetchRoutines = async (token) => {
       response = await fetch(`${BASE_URL}/routines`);
     }
     const routines = await response.json();
-    return routines
+    return routines;
   } catch (error) {
     console.error(error);
   }
@@ -94,13 +94,11 @@ export const register = async (username, password) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-
-          username,
-          password,
-        
+        username,
+        password,
       }),
     });
-    console.log(response)
+    console.log(response);
     const {
       data: { token, message },
     } = await response.json();
@@ -108,5 +106,13 @@ export const register = async (username, password) => {
     return token;
   } catch (error) {
     console.error(error);
+  }
+};
+
+export const createRoutine = async () => {
+  try {
+    
+  } catch (error) {
+    console.error;
   }
 };
