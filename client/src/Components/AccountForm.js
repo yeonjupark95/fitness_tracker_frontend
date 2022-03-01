@@ -15,7 +15,7 @@ const AccountForm = ({ setToken, setUser}) => {
     const dataObj = await callApi({
       url: `/users/${method}`,
       method: 'POST',
-      body: {user: {username, password}}
+      body: {username, password}
     });
     const token = dataObj && dataObj.data && dataObj.data.token;
     

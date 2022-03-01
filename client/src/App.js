@@ -10,10 +10,18 @@ const App = () => {
   const [token, setToken] = useState("");
   const [user, setUser] = useState({});
   const [routines, setRoutines] = useState([]);
+  // const [Activities, setActivities] = useState([]);
   const navigate = useNavigate();
   console.log(routines);
 
-  
+  // const handleRoutines = async () => {
+  //   const {
+  //     data: { routines },
+  //   } = await callApi({ url: "/routines", token });
+  //   if (routines) {
+  //     setRoutines(routines);
+  //   }
+  // };
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -21,7 +29,13 @@ const App = () => {
     }
   }, []);
 
-
+  // useEffect(() => {
+  //   try {
+  //     handleRoutines();
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }, [token]);
 
   return (
     <>
