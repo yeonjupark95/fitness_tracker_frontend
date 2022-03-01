@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import { callApi } from "./api";
 import "./App.css";
 
-import { Home, AccountForm, Routines } from "./Components";
+import { Home, AccountForm, Routines, Activities } from "./Components";
 
 const App = () => {
   const [token, setToken] = useState("");
@@ -13,14 +13,7 @@ const App = () => {
   const navigate = useNavigate();
   console.log(routines);
 
-  const handleRoutines = async () => {
-    const {
-      data: { routines },
-    } = await callApi({ url: "/routines", token });
-    if (routines) {
-      setRoutines(routines);
-    }
-  };
+  
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -28,13 +21,7 @@ const App = () => {
     }
   }, []);
 
-  useEffect(() => {
-    try {
-      handleRoutines();
-    } catch (error) {
-      console.error(error);
-    }
-  }, [token]);
+
 
   return (
     <>
@@ -43,6 +30,7 @@ const App = () => {
       {token && <Link to="/home">Home</Link>}
       {!token && <Link to="/account/login">Login</Link>}
       <Link to="/routines">Routines</Link>
+      <Link to="/activities">Activities</Link>
       {token && (
         <button
           onClick={() => {
@@ -63,6 +51,7 @@ const App = () => {
           }
         />
         <Route path="/routines" element={<Routines />} />
+        <Route path="/activities" element={<Activities />} />
       </Routes>
     </>
   );
