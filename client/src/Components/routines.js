@@ -1,7 +1,7 @@
 import { fetchRoutines } from "../api";
 import { useState, useEffect } from "react";
 
-const Routines = () => {
+const Routines = (token) => {
   const [routines, setRoutines] = useState([]);
 
   const handleRoutines = async () => {
@@ -19,6 +19,7 @@ const Routines = () => {
 
   return (
     <div className="routines-wrapper">
+      <h2>Routines</h2>
       {routines.length ? (
         routines.length > 0 &&
         routines.map(({ id, creatorId, name, goal, creatorName }) => {
@@ -31,7 +32,7 @@ const Routines = () => {
           );
         })
       ) : (
-        <h5>No routines to display</h5>
+        <h5> There are no routines to display! </h5>
       )}
     </div>
   );
