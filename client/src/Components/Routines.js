@@ -25,6 +25,7 @@ const Routines = (token) => {
         routines.map(
           ({
             id,
+            isPublic,
             name,
             goal,
             creatorName,
@@ -33,17 +34,23 @@ const Routines = (token) => {
             ],
           }) => {
             return (
-              <div className="routines" key={id}>
-                <div className="routines-name">{name}</div>
-                <div className="routines-creator-name">{creatorName}</div>
-                <div className="routines-goal">{goal}</div>
-                <div className="routines-activities">
-                  <div className="activities-id">{activitiesName}</div>
-                  <div className="activities-name">{description}</div>
-                  <div className="activities-description">Duration: {duration}</div>
-                  <div className="activities-count">Count: {count}</div>
-                </div>
-              </div>
+              <>
+                {isPublic && (
+                  <div className="routines" key={id}>
+                    <div className="routines-name">{name}</div>
+                    <div className="routines-creator-name">{creatorName}</div>
+                    <div className="routines-goal">{goal}</div>
+                    <div className="routines-activities">
+                      <div className="activities-id">{activitiesName}</div>
+                      <div className="activities-name">{description}</div>
+                      <div className="activities-description">
+                        Duration: {duration}
+                      </div>
+                      <div className="activities-count">Count: {count}</div>
+                    </div>
+                  </div>
+                )}
+              </>
             );
           }
         )
