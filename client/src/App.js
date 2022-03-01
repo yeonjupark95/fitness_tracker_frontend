@@ -3,7 +3,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 import "./App.css";
 
-import { Home, AccountForm, Routines } from "./Components";
+import { Home, AccountForm, Routines, Activities } from "./Components";
 
 const App = () => {
   const [token, setToken] = useState("");
@@ -23,6 +23,7 @@ const App = () => {
       {token && <Link to="/home">Home</Link>}
       {!token && <Link to="/account/login">Login</Link>}
       <Link to="/routines">Routines</Link>
+      <Link to="/activities">Activities</Link>
       {token && (
         <button
           onClick={() => {
@@ -43,6 +44,7 @@ const App = () => {
           }
         />
         <Route path="/routines" element={<Routines />} />
+        <Route path="/activities" element={<Activities />} />
       </Routes>
     </>
   );

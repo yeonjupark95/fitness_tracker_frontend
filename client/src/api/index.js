@@ -57,9 +57,7 @@ export const fetchActivities = async (token) => {
     } else {
       response = await fetch(`${BASE_URL}/activities`);
     }
-    const {
-      data: { activities },
-    } = await response.json();
+    const activities = await response.json();
     return activities;
   } catch (error) {
     console.error(error);
@@ -96,12 +94,13 @@ export const register = async (username, password) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        user: {
+
           username,
           password,
-        },
+        
       }),
     });
+    console.log(response)
     const {
       data: { token, message },
     } = await response.json();
