@@ -40,8 +40,8 @@ const Routines = (token) => {
                 <div className="routines-activities">
                   <div className="activities-id">{activitiesName}</div>
                   <div className="activities-name">{description}</div>
-                  <div className="activities-description">{duration}</div>
-                  <div className="activities-count">{count}</div>
+                  <div className="activities-description">Duration: {duration}</div>
+                  <div className="activities-count">Count: {count}</div>
                 </div>
               </div>
             );
