@@ -22,12 +22,13 @@ const Routines = (token) => {
       <h2>Routines</h2>
       {routines.length ? (
         routines.length > 0 &&
-        routines.map(({ id, creatorId, name, goal, creatorName }) => {
+        routines.map(({ id, creatorId, name, goal, creatorName, activities }) => {
           return (
             <div className="routines" key={id}>
-              {name}
-              {goal}
-              {creatorName}
+              <div className="routines-name">{name}</div>
+              <div className="routines-creator-name">{creatorName}</div>
+              <div className="routines-goal">{goal}</div>
+              <div className="activities"></div>
             </div>
           );
         })

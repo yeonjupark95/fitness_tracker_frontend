@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import { useNavigate } from "react-router";
-import { callApi } from "./api";
 import "./App.css";
 
 import { Home, AccountForm, Routines } from "./Components";
@@ -9,32 +8,13 @@ import { Home, AccountForm, Routines } from "./Components";
 const App = () => {
   const [token, setToken] = useState("");
   const [user, setUser] = useState({});
-  const [routines, setRoutines] = useState([]);
   const navigate = useNavigate();
-  console.log(routines);
-
-  const handleRoutines = async () => {
-    const {
-      data: { routines },
-    } = await callApi({ url: "/routines", token });
-    if (routines) {
-      setRoutines(routines);
-    }
-  };
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
       setToken(localStorage.getItem("token"));
     }
   }, []);
-
-  useEffect(() => {
-    try {
-      handleRoutines();
-    } catch (error) {
-      console.error(error);
-    }
-  }, [token]);
 
   return (
     <>
