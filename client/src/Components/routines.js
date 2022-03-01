@@ -31,7 +31,7 @@ const Routines = () => {
           );
         })
       ) : (
-        <h5>No routines to display</h5>
+        <h5> There are no routines to display! </h5>
       )}
     </div>
   );
