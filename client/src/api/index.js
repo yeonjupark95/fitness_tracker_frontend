@@ -109,10 +109,41 @@ export const register = async (username, password) => {
   }
 };
 
-export const createRoutine = async () => {
+export const createRoutine = async (
+  name,
+  goal,
+  creatorName,
+  activities,
+  activitiesName,
+  activitiesDescription,
+  duration,
+  count,
+  token
+) => {
   try {
-    
+    const response = await fetch(`${BASE_URL}/routines`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        name,
+        goal,
+        creatorName,
+        activities: [
+          {
+            activitiesName,
+            activitiesDescription,
+            duration,
+            count,
+          },
+        ],
+      }),
+    });
+    const routine = await response.json();
+    return routine;
   } catch (error) {
-    console.error;
+    console.error(error);
   }
 };
