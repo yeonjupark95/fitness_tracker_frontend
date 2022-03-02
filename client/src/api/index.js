@@ -112,8 +112,7 @@ export const register = async (username, password) => {
 export const createRoutine = async (
   name,
   goal,
-  creatorName,
-  activities,
+  isPublic,
   activitiesName,
   activitiesDescription,
   duration,
@@ -130,7 +129,7 @@ export const createRoutine = async (
       body: JSON.stringify({
         name,
         goal,
-        creatorName,
+        isPublic,
         activities: [
           {
             activitiesName,

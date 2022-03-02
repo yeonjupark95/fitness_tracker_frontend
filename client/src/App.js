@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import "./App.css";
 
 import { Home, AccountForm, Routines, Activities } from "./Components";
+import AddRoutine from "./Components/AddRoutine";
 
 const App = () => {
   const [token, setToken] = useState("");
@@ -46,6 +47,7 @@ const App = () => {
         />
         <Route path="/routines" element={<Routines />} />
         <Route path="/activities" element={<Activities />} />
+        <Route path="/myroutines" element={<AddRoutine/>}/>
       </Routes>
     </>
   );
