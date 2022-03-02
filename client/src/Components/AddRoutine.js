@@ -32,6 +32,7 @@ const AddRoutine = ({ token, routines, setRoutines }) => {
         count,
         token
       );
+      console.log(newRoutine);
       setRoutines([...routines, newRoutine]);
       navigate("/routines");
     } catch (error) {
