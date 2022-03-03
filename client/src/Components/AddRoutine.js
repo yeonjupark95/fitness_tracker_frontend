@@ -32,7 +32,7 @@ const AddRoutine = ({ token, routines, setRoutines }) => {
         count,
         token
       );
-      console.log(newRoutine);
+      console.log("newRoutine", newRoutine);
       setRoutines([...routines, newRoutine]);
       navigate("/routines");
     } catch (error) {
@@ -63,7 +63,6 @@ const AddRoutine = ({ token, routines, setRoutines }) => {
           type="checkbox"
           value={isPublic}
           onChange={(event) => setIsPublic(event.target.checked)}
-          required
         />
         <label htmlFor="checkbox">Public</label>
         <button id="create-button">CREATE</button>

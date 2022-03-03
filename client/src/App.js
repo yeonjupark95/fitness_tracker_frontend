@@ -9,6 +9,7 @@ const App = () => {
   const [token, setToken] = useState("");
   const [user, setUser] = useState({});
   const navigate = useNavigate();
+  const [routines, setRoutines] = useState([]);
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -46,7 +47,16 @@ const App = () => {
         />
         <Route path="/routines" element={<Routines />} />
         <Route path="/activities" element={<Activities />} />
-        <Route path="/myroutines" element={<AddRoutine/>}/>
+        <Route
+          path="/myroutines"
+          element={
+            <AddRoutine
+              token={token}
+              routines={routines}
+              setRoutines={setRoutines}
+            />
+          }
+        />
       </Routes>
     </>
   );
