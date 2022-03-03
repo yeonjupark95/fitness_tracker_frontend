@@ -7,8 +7,7 @@ import {
   AccountForm,
   Routines,
   Activities,
-  AddRoutine,
-  ShowRoutine,
+  AddRoutine
 } from "./Components";
 
 const App = () => {
@@ -57,11 +56,6 @@ const App = () => {
           path="/myroutines"
           element={[
             <AddRoutine
-              token={token}
-              routines={routines}
-              setRoutines={setRoutines}
-            />,
-            <ShowRoutine
               token={token}
               routines={routines}
               setRoutines={setRoutines}
