@@ -8,7 +8,7 @@ const Login = (token) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const token = await login(username, password);
-    console.log(token);
+    console.log("token",token);
   };
 
   return (
