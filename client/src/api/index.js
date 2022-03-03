@@ -1,4 +1,4 @@
-import axios from "axios";
+// import axios from "axios";
 const BASE_URL = "https://secret-fjord-65669.herokuapp.com/api/";
 
 export const callApi = async ({ url, method, token, body }) => {
@@ -146,3 +146,15 @@ export const createRoutine = async (
     console.error(error);
   }
 };
+
+export const getUser = async (token) => {
+	const response = await fetch(`${BASE_URL}/users/me`, {
+		headers: {
+			'Content-Type': 'application/json',
+			'Authorization': `Bearer ${token}`
+		},
+	})
+	const { data: userObject } = await response.json();
+	return userObject;
+};
+
