@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createRoutine } from "../api";
+import { createRoutine, fetchRoutines } from "../api";
 import { useNavigate } from "react-router-dom";
 //be shown a form to create a new routine
 // the form should have text fields for name and goal
@@ -32,9 +32,19 @@ const AddRoutine = ({ token, routines, setRoutines }) => {
         count,
         token
       );
-      console.log(newRoutine);
+      console.log("newRoutine", newRoutine);
       setRoutines([...routines, newRoutine]);
       navigate("/routines");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleMyRoutine = async () => {
+    try {
+      const routines = await fetchRoutines(token);
+      // const routineCreator = routines.map((routine)=>({creatorName: }))
+      setRoutines(routines);
     } catch (error) {
       console.error(error);
     }
@@ -63,7 +73,6 @@ const AddRoutine = ({ token, routines, setRoutines }) => {
           type="checkbox"
           value={isPublic}
           onChange={(event) => setIsPublic(event.target.checked)}
-          required
         />
         <label htmlFor="checkbox">Public</label>
         <button id="create-button">CREATE</button>

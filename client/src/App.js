@@ -2,13 +2,19 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 
-import { Home, AccountForm, Routines, Activities } from "./Components";
-import AddRoutine from "./Components/AddRoutine";
+import {
+  Home,
+  AccountForm,
+  Routines,
+  Activities,
+  AddRoutine
+} from "./Components";
 
 const App = () => {
   const [token, setToken] = useState("");
   const [user, setUser] = useState({});
   const navigate = useNavigate();
+  const [routines, setRoutines] = useState([]);
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -46,7 +52,16 @@ const App = () => {
         />
         <Route path="/routines" element={<Routines />} />
         <Route path="/activities" element={<Activities />} />
-        <Route path="/myroutines" element={<AddRoutine/>}/>
+        <Route
+          path="/myroutines"
+          element={[
+            <AddRoutine
+              token={token}
+              routines={routines}
+              setRoutines={setRoutines}
+            />,
+          ]}
+        />
       </Routes>
     </>
   );

@@ -141,6 +141,8 @@ export const createRoutine = async (
       }),
     });
     const routine = await response.json();
+    console.log("you created a routine");
+    console.log("token:", token);
     return routine;
   } catch (error) {
     console.error(error);
@@ -148,13 +150,12 @@ export const createRoutine = async (
 };
 
 export const getUser = async (token) => {
-	const response = await fetch(`${BASE_URL}/users/me`, {
-		headers: {
-			'Content-Type': 'application/json',
-			'Authorization': `Bearer ${token}`
-		},
-	})
-	const { data: userObject } = await response.json();
-	return userObject;
+  const response = await fetch(`${BASE_URL}/users/me`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const { data: userObject } = await response.json();
+  return userObject;
 };
-

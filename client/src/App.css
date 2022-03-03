@@ -36,10 +36,20 @@
     transform: rotate(360deg);
   }
 }
+
+h2{
+  font-size: 45px;
+}
+
+h5{
+  font-size: 20px;
+  margin-top: 0.5rem;
+  margin-bottom: 0rem;
+}
 .routines-name{
   font-size: 35px;
 }
 
-.activities-count{
+.routine-activities-count{
   margin-bottom: 1rem;
 }
