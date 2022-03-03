@@ -26,7 +26,7 @@ const AccountForm = ({ setToken, setUser}) => {
         token
       });
       console.log('dataObj: ', dataObj);
-      const users = dataObj && dataObj.data && dataObj.data;
+      const users = dataObj && dataObj.data && dataObj.data.token;
       if(users) {
         setUsername('');
         setPassword('');

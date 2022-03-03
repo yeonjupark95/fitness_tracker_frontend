@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route, Link } from "react-router-dom";
-import { useNavigate } from "react-router";
+import { useNavigate, Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 
 import { Home, AccountForm, Routines, Activities } from "./Components";
