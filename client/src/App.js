@@ -7,7 +7,7 @@ import {
   AccountForm,
   Routines,
   Activities,
-  AddRoutine
+  MyRoutines,
 } from "./Components";
 
 const App = () => {
@@ -31,7 +31,7 @@ const App = () => {
       <Link to="/routines">Routines</Link>
       <Link to="/myroutines">My Routines</Link>
       <Link to="/activities">Activities</Link>
-      {token &&(
+      {token && (
         <button
           onClick={() => {
             setToken("");
@@ -55,7 +55,7 @@ const App = () => {
         <Route
           path="/myroutines"
           element={[
-            <AddRoutine
+            <MyRoutines
               token={token}
               routines={routines}
               setRoutines={setRoutines}
