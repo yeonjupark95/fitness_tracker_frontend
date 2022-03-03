@@ -2,8 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 
-import { Home, AccountForm, Routines, Activities } from "./Components";
-import AddRoutine from "./Components/AddRoutine";
+import {
+  Home,
+  AccountForm,
+  Routines,
+  Activities,
+  AddRoutine,
+  ShowRoutine,
+} from "./Components";
 
 const App = () => {
   const [token, setToken] = useState("");
@@ -49,13 +55,18 @@ const App = () => {
         <Route path="/activities" element={<Activities />} />
         <Route
           path="/myroutines"
-          element={
+          element={[
             <AddRoutine
               token={token}
               routines={routines}
               setRoutines={setRoutines}
-            />
-          }
+            />,
+            <ShowRoutine
+              token={token}
+              routines={routines}
+              setRoutines={setRoutines}
+            />,
+          ]}
         />
       </Routes>
     </>

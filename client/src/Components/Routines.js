@@ -1,9 +1,7 @@
 import { fetchRoutines } from "../api";
 import { useState, useEffect } from "react";
 
-const Routines = (token) => {
-  const [routines, setRoutines] = useState([]);
-
+const Routines = (token, routines, setRoutines) => {
   const handleRoutines = async () => {
     try {
       const newRoutines = await fetchRoutines();
