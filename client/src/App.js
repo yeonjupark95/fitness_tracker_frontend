@@ -3,6 +3,7 @@ import { useNavigate, Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 
 import { Home, AccountForm, Routines, Activities } from "./Components";
+import AddRoutine from "./Components/AddRoutine";
 
 const App = () => {
   const [token, setToken] = useState("");
@@ -22,6 +23,7 @@ const App = () => {
       {token && <Link to="/home">Home</Link>}
       {!token && <Link to="/account/login">Login</Link>}
       <Link to="/routines">Routines</Link>
+      <Link to="/myroutines">My Routines</Link>
       <Link to="/activities">Activities</Link>
       {token && (
         <button
@@ -44,6 +46,7 @@ const App = () => {
         />
         <Route path="/routines" element={<Routines />} />
         <Route path="/activities" element={<Activities />} />
+        <Route path="/myroutines" element={<AddRoutine/>}/>
       </Routes>
     </>
   );

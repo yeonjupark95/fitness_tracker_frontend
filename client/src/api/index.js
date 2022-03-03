@@ -36,7 +36,7 @@ export const fetchRoutines = async (token) => {
       response = await fetch(`${BASE_URL}/routines`);
     }
     const routines = await response.json();
-    return routines
+    return routines;
   } catch (error) {
     console.error(error);
   }
@@ -94,13 +94,11 @@ export const register = async (username, password) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-
-          username,
-          password,
-        
+        username,
+        password,
       }),
     });
-    console.log(response)
+    console.log(response);
     const {
       data: { token, message },
     } = await response.json();
@@ -110,6 +108,45 @@ export const register = async (username, password) => {
     console.error(error);
   }
 };
+
+export const createRoutine = async (
+  name,
+  goal,
+  isPublic,
+  activitiesName,
+  activitiesDescription,
+  duration,
+  count,
+  token
+) => {
+  try {
+    const response = await fetch(`${BASE_URL}/routines`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        name,
+        goal,
+        isPublic,
+        activities: [
+          {
+            activitiesName,
+            activitiesDescription,
+            duration,
+            count,
+          },
+        ],
+      }),
+    });
+    const routine = await response.json();
+    return routine;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const getUser = async (token) => {
 	const response = await fetch(`${BASE_URL}/users/me`, {
 		headers: {
@@ -120,3 +157,4 @@ export const getUser = async (token) => {
 	const { data: userObject } = await response.json();
 	return userObject;
 };
+

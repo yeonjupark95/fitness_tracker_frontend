@@ -15,7 +15,7 @@ const Routines = (token) => {
 
   useEffect(() => {
     handleRoutines();
-  }, []);
+  }, [token]);
 
   return (
     <div className="routines-wrapper">
