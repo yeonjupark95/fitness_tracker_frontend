@@ -31,7 +31,7 @@ const App = () => {
       <Link to="/routines">Routines</Link>
       <Link to="/myroutines">My Routines</Link>
       <Link to="/activities">Activities</Link>
-      {token && (
+      {token &&(
         <button
           onClick={() => {
             setToken("");

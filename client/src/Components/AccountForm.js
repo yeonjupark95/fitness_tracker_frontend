@@ -11,22 +11,23 @@ const AccountForm = ({ setToken, setUser}) => {
   const [password, setPassword] = useState('');
 
   const handleSubmit = async (event) => {
+    console.log("handleSubmit fro accountform.js")
     event.preventDefault();
-    const dataObj = await callApi({
+    const calledApi = await callApi({
       url: `/users/${method}`,
       method: 'POST',
       body: {username, password}
     });
-    const token = dataObj && dataObj.data && dataObj.data.token;
+    const token = calledApi && calledApi.token;
+    console.log("this is the token", token)
     
     if(token) {
-      const dataObj = await callApi({
+      const calledApi2 = await callApi({
         url: `/users/me`,
         method: 'GET',
         token
       });
-      console.log('dataObj: ', dataObj);
-      const users = dataObj && dataObj.data && dataObj.data.token;
+      const users = calledApi2 && calledApi2.token;
       if(users) {
         setUsername('');
         setPassword('');
