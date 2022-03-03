@@ -27,7 +27,8 @@ const AccountForm = ({ setToken, setUser}) => {
         method: 'GET',
         token
       });
-      const users = calledApi2 && calledApi2.token;
+      const users = calledApi2 && calledApi.token;
+      console.log("This is users",users)
       if(users) {
         setUsername('');
         setPassword('');
