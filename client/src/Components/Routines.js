@@ -31,23 +31,25 @@ const Routines = (token) => {
                     <div className="routines-name">{name}</div>
                     <div className="routines-creator-name">{creatorName}</div>
                     <div className="routines-goal">{goal}</div>
-                    <div className="routines-activities">
-                      {/* <div className="activities-name">{activities}</div>
-                      <div className="activities-description">
-                        {activities.description}
-                      </div>
-                      <div className="activities-duration">
-                        Duration: {activities.duration}
-                      </div>
-                      <div className="activities-count">
-                        Count: {activities.count}
-                      </div> */}
-                    </div>
+                    <div className="routines-activities"></div>
                   </div>
                 )}
-                {/* {isPublic && activities.length>0 (
-                  
-                )} */}
+                {activities.length
+                  ? (activities.length > 0 && 
+                    activities.map((activity) => {
+                      const { id, name, description, duration, count } = activity;
+                      return(
+                        <>
+                        <div className="routine-activities" key={id}>
+                        <div className="routine-activities-name"> {name} </div>
+                        <div className="routine-activities-description"> {description} </div>
+                        <div className="routine-activities-duration"> Duration: {duration} </div>
+                        <div className="routine-activities-count"> Count: {count} </div>
+                        </div>
+                        </>
+                      )
+                    }))
+                  : null}
               </>
             );
           }
