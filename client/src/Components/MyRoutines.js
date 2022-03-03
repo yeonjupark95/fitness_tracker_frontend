@@ -19,7 +19,7 @@ const MyRoutines = ({ token, routines, setRoutines }) => {
   const [duration, setDuration] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = async (event) => {
+  const handleRoutineSubmit = async (event) => {
     try {
       event.preventDefault();
       const newRoutine = await createRoutine(
@@ -51,33 +51,35 @@ const MyRoutines = ({ token, routines, setRoutines }) => {
   };
 
   return (
-    <div className="add-a-routine">
-      <div className="new-routine-form-title"> CREATE A ROUTINE </div>
-      <form className="new-routine-form" onSubmit={handleSubmit}>
-        <input
-          id="name-input"
-          type="text"
-          placeholder="Name*"
-          onChange={(event) => setName(event.target.value)}
-          required
-        />
-        <input
-          id="goal-input"
-          type="text"
-          placeholder="Goal*"
-          onChange={(event) => setGoal(event.target.value)}
-          required
-        />
-        <input
-          id="checkbox"
-          type="checkbox"
-          value={isPublic}
-          onChange={(event) => setIsPublic(event.target.checked)}
-        />
-        <label htmlFor="checkbox">Public</label>
-        <button id="create-button">CREATE</button>
-      </form>
-    </div>
+    <>
+      <div className="add-a-routine">
+        <div className="new-routine-form-title"> CREATE A ROUTINE </div>
+        <form className="new-routine-form" onSubmit={handleRoutineSubmit}>
+          <input
+            id="name-input"
+            type="text"
+            placeholder="Name*"
+            onChange={(event) => setName(event.target.value)}
+            required
+          />
+          <input
+            id="goal-input"
+            type="text"
+            placeholder="Goal*"
+            onChange={(event) => setGoal(event.target.value)}
+            required
+          />
+          <input
+            id="checkbox"
+            type="checkbox"
+            value={isPublic}
+            onChange={(event) => setIsPublic(event.target.checked)}
+          />
+          <label htmlFor="checkbox">Public</label>
+          <button id="create-button">CREATE</button>
+        </form>
+      </div>
+    </>
   );
 };
 
