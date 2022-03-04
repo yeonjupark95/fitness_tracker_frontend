@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createRoutine, fetchRoutines } from "../api";
 import { useNavigate } from "react-router-dom";
 //be shown a form to create a new routine
@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 // be able to add an activity to a routine via a small form which has a dropdown for all activities, an inputs for count and duration
 // be able to update the duration or count of any activity on the routine
 // be able to remove any activity from the routine
-const MyRoutines = ({ token, routines, setRoutines }) => {
+const MyRoutines = ({ token, routines, setRoutines, user }) => {
   const [name, setName] = useState("");
   const [goal, setGoal] = useState("");
   const [isPublic, setIsPublic] = useState(false);
@@ -18,6 +18,19 @@ const MyRoutines = ({ token, routines, setRoutines }) => {
   const [count, setCount] = useState("");
   const [duration, setDuration] = useState("");
   const navigate = useNavigate();
+
+  const handleRoutines = async (routines) => {
+    try {
+      const routines = await fetchRoutines();
+      setRoutines(routines);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    handleRoutines();
+  }, [token]);
 
   const handleRoutineSubmit = async (event) => {
     try {
@@ -35,16 +48,6 @@ const MyRoutines = ({ token, routines, setRoutines }) => {
       console.log("newRoutine", newRoutine);
       setRoutines([...routines, newRoutine]);
       navigate("/routines");
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const handleMyRoutine = async () => {
-    try {
-      const routines = await fetchRoutines(token);
-      // const routineCreator = routines.map((routine)=>({creatorName: }))
-      setRoutines(routines);
     } catch (error) {
       console.error(error);
     }
@@ -78,6 +81,27 @@ const MyRoutines = ({ token, routines, setRoutines }) => {
           <label htmlFor="checkbox">Public</label>
           <button id="create-button">CREATE</button>
         </form>
+      </div>
+      <div className="my-routines">
+        {routines.length > 0 &&
+          routines.map((routine) => {
+            const { isPublic, name, goal, creatorName, activities } = routine;
+            console.log("isPublic", isPublic);
+            if (user.username === creatorName) {
+              return (
+                <div className="my-routines-routine">
+                  <div className="my-routines-routine-name">{name}</div>
+                  <div className="my-routines-routine-goal">{goal}</div>
+                  <div className="my-routines-routine-public">
+                    {isPublic ? "Public" : "Only Me"}
+                  </div>
+                  <div className="my-routines-routine-activities">
+                    {activities}
+                  </div>
+                </div>
+              );
+            }
+          })}
       </div>
     </>
   );

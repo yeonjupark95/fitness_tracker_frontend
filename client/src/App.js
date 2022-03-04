@@ -50,7 +50,10 @@ const App = () => {
             <AccountForm user={user} setUser={setUser} setToken={setToken} />
           }
         />
-        <Route path="/routines" element={<Routines />} />
+        <Route
+          path="/routines"
+          element={<Routines routines={routines} setRoutines={setRoutines} />}
+        />
         <Route path="/activities" element={<Activities />} />
         <Route
           path="/myroutines"
@@ -59,6 +62,7 @@ const App = () => {
               token={token}
               routines={routines}
               setRoutines={setRoutines}
+              user={user}
             />,
           ]}
         />
