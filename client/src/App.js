@@ -29,8 +29,8 @@ const App = () => {
       {token && <Link to="/home">Home</Link>}
       {!token && <Link to="/account/login">Login</Link>}
       <Link to="/routines">Routines</Link>
-      <Link to="/myroutines">My Routines</Link>
       <Link to="/activities">Activities</Link>
+      <Link to="/myroutines">My Routines</Link>
       {token && (
         <button
           onClick={() => {

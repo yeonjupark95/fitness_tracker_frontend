@@ -177,7 +177,6 @@ export const deleteRoutine = async (routineIdToDelete, token) => {
 };
 
 export const createActivity = async (
-  id,
   name,
   description,
   duration,
@@ -192,7 +191,6 @@ export const createActivity = async (
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
-        id,
         name,
         description,
         duration,
@@ -203,5 +201,7 @@ export const createActivity = async (
     console.log("you created an activity");
     console.log("token:", token);
     return activity;
-  } catch (error) {}
+  } catch (error) {
+    console.error(error);
+  }
 };
