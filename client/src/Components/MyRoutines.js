@@ -157,6 +157,7 @@ const MyRoutines = ({ token, routines, setRoutines, user }) => {
                       id="edit-button"
                       variant="dark"
                       onClick={() => {
+                        navigate(`/routines/${id}/edit`);
                       }}
                     >
                       EDIT ROUTINE

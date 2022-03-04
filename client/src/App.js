@@ -66,11 +66,10 @@ const App = () => {
                 setRoutines={setRoutines}
                 user={user}
               />
-              ,
-              <EditRoutines />
             </>
           }
         />
+        <Route path="/routines/:ROUTINE_ID/edit" element={<EditRoutines />} />
       </Routes>
     </>
   );
