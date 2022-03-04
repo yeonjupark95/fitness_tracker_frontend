@@ -175,3 +175,33 @@ export const deleteRoutine = async (routineIdToDelete, token) => {
     console.error(error);
   }
 };
+
+export const createActivity = async (
+  id,
+  name,
+  description,
+  duration,
+  count,
+  token
+) => {
+  try {
+    const response = await fetch(`${BASE_URL}/activities`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        id,
+        name,
+        description,
+        duration,
+        count,
+      }),
+    });
+    const activity = await response.json();
+    console.log("you created an activity");
+    console.log("token:", token);
+    return activity;
+  } catch (error) {}
+};
