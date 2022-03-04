@@ -58,16 +58,19 @@ const App = () => {
         <Route path="/activities" element={<Activities />} />
         <Route
           path="/myroutines"
-          element={[
-            <MyRoutines
-              token={token}
-              routines={routines}
-              setRoutines={setRoutines}
-              user={user}
-            />,
-          ]}
+          element={
+            <>
+              <MyRoutines
+                token={token}
+                routines={routines}
+                setRoutines={setRoutines}
+                user={user}
+              />
+              ,
+              <EditRoutines />
+            </>
+          }
         />
-        <Route path="routines/:Routine_ID/edit" element={<EditRoutines />} />
       </Routes>
     </>
   );

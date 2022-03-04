@@ -194,10 +194,42 @@ export const createActivity = async (name, description, token) => {
   }
 };
 
-export const addActivitytoRoutine = async (token) => {
-  try{
-
-  } catch (error){
-    
+export const createRoutineActivity = async (
+  name,
+  goal,
+  isPublic,
+  activitiesName,
+  activitiesDescription,
+  duration,
+  count,
+  token
+) => {
+  try {
+    const response = await fetch(`${BASE_URL}/routines`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        name,
+        goal,
+        isPublic,
+        activities: [
+          {
+            activitiesName,
+            activitiesDescription,
+            duration,
+            count,
+          },
+        ],
+      }),
+    });
+    const routineActivity = await response.json();
+    console.log("you created a routine activity");
+    console.log("token:", token);
+    return routineActivity;
+  } catch (error) {
+    console.error(error);
   }
 };
