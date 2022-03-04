@@ -159,3 +159,19 @@ export const getUser = async (token) => {
   const { data: userObject } = await response.json();
   return userObject;
 };
+
+export const deleteRoutine = async (routineIdToDelete, token) => {
+  try {
+    const response = await fetch(`${BASE_URL}/routines/${routineIdToDelete}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const { success } = await response.json();
+    return success;
+  } catch (error) {
+    console.error(error);
+  }
+};
