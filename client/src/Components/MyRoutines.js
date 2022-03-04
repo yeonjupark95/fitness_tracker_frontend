@@ -89,16 +89,45 @@ const MyRoutines = ({ token, routines, setRoutines, user }) => {
             console.log("isPublic", isPublic);
             if (user.username === creatorName) {
               return (
-                <div className="my-routines-routine">
-                  <div className="my-routines-routine-name">{name}</div>
-                  <div className="my-routines-routine-goal">{goal}</div>
-                  <div className="my-routines-routine-public">
-                    {isPublic ? "Public" : "Only Me"}
+                <>
+                  <div className="my-routines-routine">
+                    <div className="my-routines-routine-name">{name}</div>
+                    <div className="my-routines-routine-goal">{goal}</div>
+                    <div className="my-routines-routine-public">
+                      {isPublic ? "Public" : "Only Me"}
+                    </div>
+                    <h5> Activities: </h5>
                   </div>
-                  <div className="my-routines-routine-activities">
-                    {activities}
+                  <div>
+                    {activities.length ? (
+                      activities.length > 0 &&
+                      activities.map((activity) => {
+                        const { id, name, description, duration, count } =
+                          activity;
+                        return (
+                          <>
+                            <div className="routine-activities" key={id}>
+                              <div className="routine-activities-name">
+                                Name: {name}{" "}
+                              </div>
+                              <div className="routine-activities-description">
+                                Description: {description}{" "}
+                              </div>
+                              <div className="routine-activities-duration">
+                                Duration: {duration}{" "}
+                              </div>
+                              <div className="routine-activities-count">
+                                Count: {count}{" "}
+                              </div>
+                            </div>
+                          </>
+                        );
+                      })
+                    ) : (
+                      <div> There are no activities for this routine. </div>
+                    )}
                   </div>
-                </div>
+                </>
               );
             }
           })}
