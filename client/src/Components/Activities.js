@@ -52,9 +52,9 @@ const Activities = (token) => {
             required
           />
           <input
-            id="goal-input"
+            id="description-input"
             type="text"
-            placeholder="Goal*"
+            placeholder="Description*"
             onChange={(event) => setDescription(event.target.value)}
             required
           />
