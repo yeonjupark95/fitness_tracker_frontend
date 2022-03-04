@@ -8,6 +8,7 @@ import {
   Routines,
   Activities,
   MyRoutines,
+  EditRoutines,
 } from "./Components";
 
 const App = () => {
@@ -66,6 +67,7 @@ const App = () => {
             />,
           ]}
         />
+        <Route path="routines/:Routine_ID/edit" element={<EditRoutines />} />
       </Routes>
     </>
   );

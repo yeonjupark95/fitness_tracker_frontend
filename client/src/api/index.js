@@ -51,7 +51,7 @@ export const fetchActivities = async (token) => {
       response = await fetch(`${BASE_URL}/activities`, {
         headers: {
           "Content-Type": "applicaton/json",
-          "Authorization": `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       });
     } else {
@@ -122,7 +122,7 @@ export const createRoutine = async (
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         name,
@@ -172,17 +172,13 @@ export const deleteRoutine = async (routineIdToDelete, token) => {
   }
 };
 
-export const createActivity = async (
-  name,
-  description,
-  token
-) => {
+export const createActivity = async (name, description, token) => {
   try {
     const response = await fetch(`${BASE_URL}/activities`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         name,
@@ -195,5 +191,13 @@ export const createActivity = async (
     return activity;
   } catch (error) {
     console.error(error);
+  }
+};
+
+export const addActivitytoRoutine = async (token) => {
+  try{
+
+  } catch (error){
+    
   }
 };
