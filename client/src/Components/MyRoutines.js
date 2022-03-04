@@ -142,7 +142,7 @@ const MyRoutines = ({ token, routines, setRoutines, user }) => {
                   </div>
                   <div className="my-routines-delete">
                     <Button
-                      id="edit-button"
+                      id="delete-button"
                       variant="dark"
                       onClick={() => {
                         handleRoutineDelete(id);
