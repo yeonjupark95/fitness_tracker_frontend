@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { createRoutine, fetchRoutines } from "../api";
+import { createRoutine, deleteRoutine, fetchRoutines } from "../api";
 import { useNavigate } from "react-router-dom";
+import Button from "react-bootstrap/Button";
 //be shown a form to create a new routine
 // the form should have text fields for name and goal
 // for each routine which is owned by me I should
@@ -17,7 +18,6 @@ const MyRoutines = ({ token, routines, setRoutines, user }) => {
   const [activitiesDescription, setActivitiesDescription] = useState("");
   const [count, setCount] = useState("");
   const [duration, setDuration] = useState("");
-  const navigate = useNavigate();
 
   const handleRoutines = async (routines) => {
     try {
@@ -28,14 +28,10 @@ const MyRoutines = ({ token, routines, setRoutines, user }) => {
     }
   };
 
-  useEffect(() => {
-    handleRoutines();
-  }, [token]);
-
   const handleRoutineSubmit = async (event) => {
     try {
       event.preventDefault();
-      const newRoutine = await createRoutine(
+      const newRoutines = await createRoutine(
         name,
         goal,
         isPublic,
@@ -45,12 +41,30 @@ const MyRoutines = ({ token, routines, setRoutines, user }) => {
         count,
         token
       );
-      console.log("newRoutine", newRoutine);
-      setRoutines([...routines, newRoutine]);
+      console.log("newRoutine", newRoutines);
+      setRoutines([...routines, newRoutines]);
     } catch (error) {
       console.error(error);
     }
   };
+
+  const handleRoutineDelete = async (routineIdToDelete) => {
+    try {
+      const success = await deleteRoutine(routineIdToDelete, token);
+      if (success) {
+        const newRoutines = routines.filter(
+          (routine) => routine._id !== routineIdToDelete
+        );
+        setRoutines(newRoutines);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    handleRoutines();
+  }, [token]);
 
   return (
     <>
@@ -84,11 +98,12 @@ const MyRoutines = ({ token, routines, setRoutines, user }) => {
       <div className="my-routines">
         {routines.length > 0 &&
           routines.map((routine) => {
-            const { isPublic, name, goal, creatorName, activities } = routine;
+            const { id, isPublic, name, goal, creatorName, activities } =
+              routine;
             if (user.username === creatorName) {
               return (
                 <>
-                  <div className="my-routines-routine">
+                  <div className="my-routines-routine" key={id}>
                     <div className="my-routines-routine-name">{name}</div>
                     <div className="my-routines-routine-goal">{goal}</div>
                     <div className="my-routines-routine-public">
@@ -124,6 +139,17 @@ const MyRoutines = ({ token, routines, setRoutines, user }) => {
                     ) : (
                       <div> There are no activities for this routine. </div>
                     )}
+                  </div>
+                  <div className="my-routines-delete">
+                    <Button
+                      id="edit-button"
+                      variant="dark"
+                      onClick={() => {
+                        handleRoutineDelete(id);
+                      }}
+                    >
+                      DELETE
+                    </Button>
                   </div>
                 </>
               );
