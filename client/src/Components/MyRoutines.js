@@ -127,12 +127,11 @@ const MyRoutines = ({ token, routines, setRoutines, user }) => {
                   </div>
                 </>
               );
-            } else {
-              <div className="start-creating-routine-message">
-                Start creating your own routines!
-              </div>;
             }
           })}
+        <div className="start-creating-routine-message">
+          Start creating your own routines!
+        </div>
       </div>
     </>
   );
