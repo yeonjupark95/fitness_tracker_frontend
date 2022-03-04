@@ -51,7 +51,7 @@ export const fetchActivities = async (token) => {
       response = await fetch(`${BASE_URL}/activities`, {
         headers: {
           "Content-Type": "applicaton/json",
-          "Authorization": `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       });
     } else {
@@ -122,7 +122,7 @@ export const createRoutine = async (
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         name,
@@ -172,17 +172,13 @@ export const deleteRoutine = async (routineIdToDelete, token) => {
   }
 };
 
-export const createActivity = async (
-  name,
-  description,
-  token
-) => {
+export const createActivity = async (name, description, token) => {
   try {
     const response = await fetch(`${BASE_URL}/activities`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         name,
@@ -193,6 +189,46 @@ export const createActivity = async (
     console.log("you created an activity");
     console.log("token:", token);
     return activity;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const createRoutineActivity = async (
+  name,
+  goal,
+  isPublic,
+  activitiesName,
+  activitiesDescription,
+  duration,
+  count,
+  token
+) => {
+  try {
+    const response = await fetch(`${BASE_URL}/routines`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        name,
+        goal,
+        isPublic,
+        activities: [
+          {
+            activitiesName,
+            activitiesDescription,
+            duration,
+            count,
+          },
+        ],
+      }),
+    });
+    const routineActivity = await response.json();
+    console.log("you created a routine activity");
+    console.log("token:", token);
+    return routineActivity;
   } catch (error) {
     console.error(error);
   }

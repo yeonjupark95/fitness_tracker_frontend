@@ -18,6 +18,7 @@ const MyRoutines = ({ token, routines, setRoutines, user }) => {
   const [activitiesDescription, setActivitiesDescription] = useState("");
   const [count, setCount] = useState("");
   const [duration, setDuration] = useState("");
+  const navigate = useNavigate();
 
   const handleRoutines = async (routines) => {
     try {
@@ -148,7 +149,18 @@ const MyRoutines = ({ token, routines, setRoutines, user }) => {
                         handleRoutineDelete(id);
                       }}
                     >
-                      DELETE
+                      DELETE ROUTINE
+                    </Button>
+                  </div>
+                  <div className="my-routines-edit">
+                    <Button
+                      id="edit-button"
+                      variant="dark"
+                      onClick={() => {
+                        navigate(`/routines/${id}/edit`);
+                      }}
+                    >
+                      EDIT ROUTINE
                     </Button>
                   </div>
                 </>
