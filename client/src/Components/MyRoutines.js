@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createRoutine, fetchRoutines } from "../api";
 import { useNavigate } from "react-router-dom";
 //be shown a form to create a new routine
@@ -19,8 +19,18 @@ const MyRoutines = ({ token, routines, setRoutines, user }) => {
   const [duration, setDuration] = useState("");
   const navigate = useNavigate();
 
-  console.log("user.username", user.username);
-  console.log("user", user);
+  const handleRoutines = async (routines) => {
+    try {
+      const routines = await fetchRoutines();
+      setRoutines(routines);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    handleRoutines();
+  }, [token]);
 
   const handleRoutineSubmit = async (event) => {
     try {
@@ -76,15 +86,15 @@ const MyRoutines = ({ token, routines, setRoutines, user }) => {
         {routines.length > 0 &&
           routines.map((routine) => {
             const { isPublic, name, goal, creatorName, activities } = routine;
-            console.log("user.username", user.username);
-            console.log("user", user);
-            console.log("creatorName", creatorName);
+            console.log("isPublic", isPublic);
             if (user.username === creatorName) {
               return (
                 <div className="my-routines-routine">
                   <div className="my-routines-routine-name">{name}</div>
                   <div className="my-routines-routine-goal">{goal}</div>
-                  <div className="my-routines-routine-public">{isPublic}</div>
+                  <div className="my-routines-routine-public">
+                    {isPublic ? "Public" : "Only Me"}
+                  </div>
                   <div className="my-routines-routine-activities">
                     {activities}
                   </div>

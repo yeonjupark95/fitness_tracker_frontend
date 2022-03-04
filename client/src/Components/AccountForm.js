@@ -11,7 +11,6 @@ const AccountForm = ({ setToken, setUser }) => {
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (event) => {
-    console.log("handleSubmit fro accountform.js");
     event.preventDefault();
     const calledApi = await callApi({
       url: `/users/${method}`,

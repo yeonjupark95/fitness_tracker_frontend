@@ -22,7 +22,6 @@ const App = () => {
     }
   }, []);
 
-  console.log("app user", user);
   return (
     <>
       {token && <h2>Hello, {user.username}</h2>}
@@ -51,7 +50,10 @@ const App = () => {
             <AccountForm user={user} setUser={setUser} setToken={setToken} />
           }
         />
-        <Route path="/routines" element={<Routines />} />
+        <Route
+          path="/routines"
+          element={<Routines routines={routines} setRoutines={setRoutines} />}
+        />
         <Route path="/activities" element={<Activities />} />
         <Route
           path="/myroutines"
