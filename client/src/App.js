@@ -22,6 +22,7 @@ const App = () => {
     }
   }, []);
 
+  console.log("app user", user);
   return (
     <>
       {token && <h2>Hello, {user.username}</h2>}
@@ -59,6 +60,7 @@ const App = () => {
               token={token}
               routines={routines}
               setRoutines={setRoutines}
+              user={user}
             />,
           ]}
         />
