@@ -47,7 +47,6 @@ const MyRoutines = ({ token, routines, setRoutines, user }) => {
       );
       console.log("newRoutine", newRoutine);
       setRoutines([...routines, newRoutine]);
-      navigate("/routines");
     } catch (error) {
       console.error(error);
     }
@@ -86,7 +85,6 @@ const MyRoutines = ({ token, routines, setRoutines, user }) => {
         {routines.length > 0 &&
           routines.map((routine) => {
             const { isPublic, name, goal, creatorName, activities } = routine;
-            console.log("isPublic", isPublic);
             if (user.username === creatorName) {
               return (
                 <>
@@ -98,7 +96,7 @@ const MyRoutines = ({ token, routines, setRoutines, user }) => {
                     </div>
                     <h5> Activities: </h5>
                   </div>
-                  <div>
+                  <div className="my-routines-activities">
                     {activities.length ? (
                       activities.length > 0 &&
                       activities.map((activity) => {
@@ -108,16 +106,16 @@ const MyRoutines = ({ token, routines, setRoutines, user }) => {
                           <>
                             <div className="routine-activities" key={id}>
                               <div className="routine-activities-name">
-                                Name: {name}{" "}
+                                Name: {name}
                               </div>
                               <div className="routine-activities-description">
-                                Description: {description}{" "}
+                                Description: {description}
                               </div>
                               <div className="routine-activities-duration">
-                                Duration: {duration}{" "}
+                                Duration: {duration}
                               </div>
                               <div className="routine-activities-count">
-                                Count: {count}{" "}
+                                Count: {count}
                               </div>
                             </div>
                           </>
@@ -129,6 +127,10 @@ const MyRoutines = ({ token, routines, setRoutines, user }) => {
                   </div>
                 </>
               );
+            } else {
+              <div className="start-creating-routine-message">
+                Start creating your own routines!
+              </div>;
             }
           })}
       </div>
