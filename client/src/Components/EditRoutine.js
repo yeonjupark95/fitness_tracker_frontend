@@ -25,7 +25,7 @@ const EditRoutine = ({
         setRoutines={setRoutines}
         routineId = {ROUTINE_ID}
       />
-      <AddActivityToRoutine
+     <AddActivityToRoutine
         token={token}
         activities={activities}
         setActivities={setActivities}
