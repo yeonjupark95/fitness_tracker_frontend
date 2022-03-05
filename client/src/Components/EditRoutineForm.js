@@ -1,14 +1,23 @@
 import Button from "react-bootstrap/Button";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import {editRoutine } from "../api";
+import { editRoutine, fetchRoutines, fetchActivities } from "../api";
 
-const EditRoutineForm = ({ token, routines, setRoutines, handleRoutines }) => {
+const EditRoutineForm = ({ token, routines, setRoutines }) => {
   const params = useParams();
   const [routineToEdit, setRoutineToEdit] = useState([]);
   const { id } = params;
   const navigate = useNavigate();
 
+  const handleRoutines = async () => {
+    try {
+      const routines = await fetchRoutines();
+      setRoutines(routines);
+      console.log("routines", routines);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   console.log("routines", routines);
 
   const handleEdit = async (event) => {
@@ -21,6 +30,11 @@ const EditRoutineForm = ({ token, routines, setRoutines, handleRoutines }) => {
       console.erorr(error);
     }
   };
+
+
+  useEffect(() => {
+    handleRoutines();
+  }, [token]);
 
   for (let i = 0; i < routines.length; i++) {
     if (routines[i].id === id) {
@@ -57,7 +71,7 @@ const EditRoutineForm = ({ token, routines, setRoutines, handleRoutines }) => {
       </form>
     </div>
   );
-  // return null;
+//   return null;
 };
 
 export default EditRoutineForm;

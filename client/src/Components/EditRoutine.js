@@ -1,5 +1,8 @@
 import { AddActivityToRoutine } from ".";
 import EditRoutineForm from "./EditRoutineForm";
+import { fetchRoutines, fetchActivities } from "../api";
+import { useEffect } from "react";
+
 // for each routine which is owned by me I should
 // be able to update the name and goal for the routine
 // be able to delete the entire routine
@@ -12,22 +15,20 @@ const EditRoutine = ({
   setActivities,
   routines,
   setRoutines,
-  handleRoutines,
-  handleActivities,
 }) => {
+
   return (
     <>
       <EditRoutineForm
         token={token}
         routines={routines}
         setRoutines={setRoutines}
-        handleRoutines={handleRoutines}
       />
+
       <AddActivityToRoutine
         token={token}
         activities={activities}
         setActivities={setActivities}
-        handleActivities={handleActivities}
       />
     </>
   );

@@ -212,3 +212,24 @@ export const createActivityToRoutine = async (
     console.error(error);
   }
 };
+
+export const editRoutine = async (id, routine, token) => {
+  try {
+    const response = await fetch(`${BASE_URL}routines/${id}/`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        routine,
+      }),
+    });
+    const editRoutine = await response.json();
+    console.log("you edited Routine", editRoutine);
+    console.log("you created a routine activity token", token);
+    return editRoutine;
+  } catch (error) {
+    console.error(error);
+  }
+};
