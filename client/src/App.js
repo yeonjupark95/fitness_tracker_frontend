@@ -78,7 +78,7 @@ const App = () => {
             />
           }
         />
-        <Route path="/activities" element={<Activities />} />
+        <Route path="/activities" element={<Activities token={token} activities={activities} setActivities={setActivities}/>} />
         <Route
           path="/myroutines"
           element={

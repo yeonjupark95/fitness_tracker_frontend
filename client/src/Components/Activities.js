@@ -21,6 +21,7 @@ const Activities = (token) => {
   const handleActivitySubmit = async (event) => {
     try {
       event.preventDefault();
+      console.log("hello");
       const newActivity = await createActivity(
         name,
         description,

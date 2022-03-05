@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { createRoutineActivity, fetchActivities } from "../api";
+import { createActivityToRoutine, fetchActivities } from "../api";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 // for each routine which is owned by me I should
@@ -14,12 +14,15 @@ const EditRoutines = ({ token, activities, setActivities }) => {
   const [goal, setGoal] = useState("");
   const [isPublic, setIsPublic] = useState(false);
   const [activitiesName, setActivitiesName] = useState("");
+  const [activityId, setActivityId] = useState(0);
   const [activitiesDescription, setActivitiesDescription] = useState("");
   const [count, setCount] = useState("");
   const [duration, setDuration] = useState("");
   const navigate = useNavigate();
   const params = useParams();
   const [routineActivity, setRoutineActivity] = useState([]);
+
+  const { ROUTINE_ID } = useParams();
 
   const handleActivities = async () => {
     try {
@@ -32,12 +35,9 @@ const EditRoutines = ({ token, activities, setActivities }) => {
 
   const handleRoutineActivitySubmit = async () => {
     try {
-      const newRoutineActivity = await createRoutineActivity(
-        name,
-        goal,
-        isPublic,
-        activitiesName,
-        activitiesDescription,
+      const newRoutineActivity = await createActivityToRoutine(
+        activityId,
+        ROUTINE_ID,
         duration,
         count,
         token
@@ -58,12 +58,18 @@ const EditRoutines = ({ token, activities, setActivities }) => {
   return (
     <>
       <div className="add-a-routin-activity">
-        <div className="new-routine-activity-form-title"> ADD ACTIVITY TO  </div>
+        <div className="new-routine-activity-form-title"> ADD ACTIVITY TO </div>
         <form
           className="new-routine-activity-form"
           onSubmit={handleRoutineActivitySubmit}
         >
-          <select id="activities-name-option">
+          <select
+            id="activities-name-option"
+            value={activityId}
+            onChange={(event) => {
+              setActivityId(event.value);
+            }}
+          >
             {activities.map((activity) => {
               const { name } = activity;
               return <option value={name}>{name}</option>;
@@ -80,7 +86,7 @@ const EditRoutines = ({ token, activities, setActivities }) => {
             id="duration-input"
             type="text"
             placeholder="duration*"
-            onChange={(event) => setDuration(event.target.checked)}
+            onChange={(event) => setDuration(event.target.value)}
           />
           <Button
             id="submit-button"
