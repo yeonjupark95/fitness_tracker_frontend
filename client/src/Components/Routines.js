@@ -1,13 +1,12 @@
 import { fetchRoutines } from "../api";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import SingleRoutine from "./SingleRoutine";
 
-const Routines = (token) => {
-  const [routines, setRoutines] = useState([]);
+const Routines = ({ token, routines, setRoutines }) => {
   const handleRoutines = async () => {
     try {
-      const newRoutines = await fetchRoutines();
-      setRoutines(newRoutines);
+      const routines = await fetchRoutines();
+      setRoutines(routines);
       console.log("routines", routines);
     } catch (error) {
       console.error(error);
@@ -20,7 +19,7 @@ const Routines = (token) => {
 
   return (
     <div className="routines-wrapper">
-      <SingleRoutine routines={routines}/>
+      <SingleRoutine routines={routines} />
     </div>
   );
 };

@@ -1,10 +1,9 @@
 import { fetchActivities, createActivity } from "../api";
 import { useState, useEffect } from "react";
-import Button from "react-bootstrap/Button";
 import SingleActivity from "./SingleActivity";
 
-const Activities = (token) => {
-  const [activities, setActivities] = useState([]);
+const Activities = ({ token, activities, setActivities }) => {
+  // const [activities, setActivities] = useState([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [duration, setDuration] = useState("");
@@ -12,8 +11,9 @@ const Activities = (token) => {
 
   const handleActivities = async () => {
     try {
-      const newActivities = await fetchActivities();
-      setActivities(newActivities);
+      const activities = await fetchActivities();
+      setActivities(activities);
+      console.log("activities", activities);
     } catch (error) {
       console.error(error);
     }
@@ -39,7 +39,7 @@ const Activities = (token) => {
 
   useEffect(() => {
     handleActivities();
-  }, []);
+  }, [token]);
 
   return (
     <>

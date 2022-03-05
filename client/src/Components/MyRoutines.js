@@ -14,10 +14,6 @@ const MyRoutines = ({ token, routines, setRoutines, user }) => {
   const [name, setName] = useState("");
   const [goal, setGoal] = useState("");
   const [isPublic, setIsPublic] = useState(false);
-  const [activitiesName, setActivitiesName] = useState("");
-  const [activitiesDescription, setActivitiesDescription] = useState("");
-  const [count, setCount] = useState("");
-  const [duration, setDuration] = useState("");
   const navigate = useNavigate();
 
   const handleRoutines = async (routines) => {
