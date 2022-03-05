@@ -13,7 +13,7 @@ import {
   Routines,
   Activities,
   MyRoutines,
-  EditRoutines,
+  AddActivityToRoutine,
 } from "./Components";
 
 const App = () => {
@@ -119,7 +119,7 @@ const App = () => {
         <Route
           path="/routines/:ROUTINE_ID/edit"
           element={
-            <EditRoutines
+            <AddActivityToRoutine
               token={token}
               activities={activities}
               setActivities={setActivities}

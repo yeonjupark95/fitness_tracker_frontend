@@ -9,7 +9,7 @@ import Button from "react-bootstrap/Button";
 // be able to update the duration or count of any activity on the routine
 // be able to remove any activity from the routine
 
-const EditRoutines = ({ token, activities, setActivities }) => {
+const AddActivityToRoutine = ({ token, activities, setActivities }) => {
   const [activityId, setActivityId] = useState(0);
   const [count, setCount] = useState("");
   const [duration, setDuration] = useState("");
@@ -97,4 +97,4 @@ const EditRoutines = ({ token, activities, setActivities }) => {
   );
 };
 
-export default EditRoutines;
+export default AddActivityToRoutine;
