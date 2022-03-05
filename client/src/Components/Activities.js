@@ -1,9 +1,9 @@
 import { fetchActivities, createActivity } from "../api";
 import { useState, useEffect } from "react";
-import Button from "react-bootstrap/Button";
+import SingleActivity from "./SingleActivity";
 
-const Activities = (token) => {
-  const [activities, setActivities] = useState([]);
+const Activities = ({ token, activities, setActivities }) => {
+  // const [activities, setActivities] = useState([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [duration, setDuration] = useState("");
@@ -11,8 +11,9 @@ const Activities = (token) => {
 
   const handleActivities = async () => {
     try {
-      const newActivities = await fetchActivities();
-      setActivities(newActivities);
+      const activities = await fetchActivities();
+      setActivities(activities);
+      console.log("activities", activities);
     } catch (error) {
       console.error(error);
     }
@@ -38,7 +39,7 @@ const Activities = (token) => {
 
   useEffect(() => {
     handleActivities();
-  }, []);
+  }, [token]);
 
   return (
     <>
@@ -62,22 +63,7 @@ const Activities = (token) => {
           <button id="create-button">CREATE</button>
         </form>
       </div>
-      <div className="activities-wrapper">
-        <h2>Activities</h2>
-        {activities.length ? (
-          activities.length > 0 &&
-          activities.map(({ id, name, description }) => {
-            return (
-              <div className="activities" key={id}>
-                <div className="activities-name"> {name} </div>
-                <div className="activities-description"> {description} </div>
-              </div>
-            );
-          })
-        ) : (
-          <h5> There are no Activities to display! </h5>
-        )}
-      </div>
+      <SingleActivity activities={activities} />
     </>
   );
 };
