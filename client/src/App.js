@@ -121,6 +121,8 @@ const App = () => {
           element={
             <EditRoutine
               token={token}
+              routines={routines}
+              setRoutines={setRoutines}
               activities={activities}
               setActivities={setActivities}
             />
