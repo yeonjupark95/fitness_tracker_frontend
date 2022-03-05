@@ -14,7 +14,10 @@ export const callApi = async ({ url, method, token, body }) => {
       options.headers["Authorization"] = `Bearer ${token}`;
     }
     const response = await fetch(BASE_URL + url, options);
+    console.log("this is the response", response)
     const data = await response.json();
+    console.log(data.message)
+    console.log("this is the data", data)
 
     return data;
   } catch (error) {
@@ -82,6 +85,7 @@ export const login = async (username, password) => {
     const result = await response.json();
     console.log(result);
   } catch (error) {
+    console.dir(error)
     console.error(error);
   }
 };
@@ -198,9 +202,9 @@ export const createActivityToRoutine = async (
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          activityId:activityId*1,
-          duration:duration*1,
-          count:count*1,
+          activityId: activityId * 1,
+          duration: duration * 1,
+          count: count * 1,
         }),
       }
     );

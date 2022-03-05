@@ -1,7 +1,6 @@
 import { AddActivityToRoutine } from ".";
 import EditRoutineForm from "./EditRoutineForm";
 import { useParams } from "react-router-dom";
-
 // for each routine which is owned by me I should
 // be able to update the name and goal for the routine
 // be able to delete the entire routine
@@ -26,7 +25,6 @@ const EditRoutine = ({
         setRoutines={setRoutines}
         routineId = {ROUTINE_ID}
       />
-
       <AddActivityToRoutine
         token={token}
         activities={activities}
