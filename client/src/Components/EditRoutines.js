@@ -35,6 +35,7 @@ const EditRoutines = ({ token, activities, setActivities }) => {
 
   const handleRoutineActivitySubmit = async () => {
     try {
+      console.log("activityId", activityId);
       const newRoutineActivity = await createActivityToRoutine(
         activityId,
         ROUTINE_ID,
@@ -67,12 +68,12 @@ const EditRoutines = ({ token, activities, setActivities }) => {
             id="activities-name-option"
             value={activityId}
             onChange={(event) => {
-              setActivityId(event.value);
+              setActivityId(event.target.value);
             }}
           >
             {activities.map((activity) => {
-              const { name } = activity;
-              return <option value={name}>{name}</option>;
+              const { name, id } = activity;
+              return <option value={id}>{name}</option>;
             })}
           </select>
           <input

@@ -190,7 +190,7 @@ export const createActivityToRoutine = async (
 ) => {
   try {
     const response = await fetch(
-      `${BASE_URL}/routines/${routineId}/activities`,
+      `${BASE_URL}routines/${routineId}/activities`,
       {
         method: "POST",
         headers: {
@@ -198,9 +198,9 @@ export const createActivityToRoutine = async (
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          activityId,
-          duration,
-          count,
+          activityId:activityId*1,
+          duration:duration*1,
+          count:count*1,
         }),
       }
     );
