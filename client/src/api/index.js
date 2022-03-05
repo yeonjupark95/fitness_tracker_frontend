@@ -113,8 +113,6 @@ export const createRoutine = async (
   name,
   goal,
   isPublic,
-  activitiesName,
-  activitiesDescription,
   token
 ) => {
   try {
@@ -128,12 +126,6 @@ export const createRoutine = async (
         name,
         goal,
         isPublic,
-        activities: [
-          {
-            activitiesName,
-            activitiesDescription,
-          },
-        ],
       }),
     });
     const routine = await response.json();
