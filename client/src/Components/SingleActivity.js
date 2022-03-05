@@ -1,8 +1,9 @@
 const SingleActivity = ({ activities }) => {
+  console.log("single activities", activities);
   return (
     <div className="activities-wrapper">
       <h5>Activities</h5>
-      {activities.length ? (
+      {activities ? (
         activities.length > 0 &&
         activities.map((activity) => {
           const { id, name, description, duration, count } = activity;
