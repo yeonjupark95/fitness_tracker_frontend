@@ -3,30 +3,34 @@ import { useNavigate, Link, useParams } from "react-router-dom";
 import { callApi } from "../api";
 
 const AccountForm = ({ setToken, setUser }) => {
+  
   const params = useParams();
   let { method } = params;
   const accountTitle = method === "login" ? "Log in" : "Register";
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState([]);
 
   const handleSubmit = async (event) => {
+    try{
     event.preventDefault();
-    const calledApi = await callApi({
+    const user = await callApi({
       url: `/users/${method}`,
       method: "POST",
       body: { username, password },
     });
-    const token = calledApi && calledApi.token;
+    const token = user && user.token;
     console.log("this is the token", token);
-
+    setErrors(user.message)
+    console.log(user.message)
     if (token) {
-      const calledApi2 = await callApi({
+      const username = await callApi({
         url: `/users/me`,
         method: "GET",
         token,
       });
-      const users = calledApi2;
+      const users = username;
       console.log("This is users", users);
       if (users) {
         setUsername("");
@@ -37,11 +41,16 @@ const AccountForm = ({ setToken, setUser }) => {
         localStorage.setItem("token", token);
       }
     }
+  }catch(error){
+    console.log("this is an error",error)
+    setErrors(errors)
+  }
   };
 
   return (
     <>
       <div>
+        {errors &&<div>{errors}</div>}
         <h1>{accountTitle}</h1>
         <form onSubmit={handleSubmit}>
           <input
