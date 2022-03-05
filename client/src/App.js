@@ -43,8 +43,7 @@ const App = () => {
   return (
     <>
       {token && <h2>Hello, {user.username}</h2>}
-      <Link to="/"></Link>
-      {token && <Link to="/home">Home</Link>}
+      {token && <Link to="/">Home</Link>}
       {!token && <Link to="/account/login">Login</Link>}
       <Link to="/routines">Routines</Link>
       <Link to="/activities">Activities</Link>
@@ -54,14 +53,14 @@ const App = () => {
           onClick={() => {
             setToken("");
             localStorage.removeItem("token");
-            navigate("/routines");
+            navigate("/");
           }}
         >
           Log Out
         </button>
       )}
       <Routes>
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route
           path="/account/:method"
           element={
