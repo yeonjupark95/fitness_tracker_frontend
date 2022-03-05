@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { createRoutine, deleteRoutine, fetchRoutines } from "../api";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
+import SingleActivity from "./SingleActivity";
 //be shown a form to create a new routine
 // the form should have text fields for name and goal
 // for each routine which is owned by me I should
@@ -14,10 +15,6 @@ const MyRoutines = ({ token, routines, setRoutines, user }) => {
   const [name, setName] = useState("");
   const [goal, setGoal] = useState("");
   const [isPublic, setIsPublic] = useState(false);
-  const [activitiesName, setActivitiesName] = useState("");
-  const [activitiesDescription, setActivitiesDescription] = useState("");
-  const [count, setCount] = useState("");
-  const [duration, setDuration] = useState("");
   const navigate = useNavigate();
 
   const handleRoutines = async (routines) => {
@@ -102,36 +99,9 @@ const MyRoutines = ({ token, routines, setRoutines, user }) => {
                     <div className="my-routines-routine-public">
                       {isPublic ? "Public" : "Only Me"}
                     </div>
-                    <h5> Activities: </h5>
                   </div>
                   <div className="my-routines-activities">
-                    {activities ? (
-                      activities.length > 0 &&
-                      activities.map((activity) => {
-                        const { id, name, description, duration, count } =
-                          activity;
-                        return (
-                          <>
-                            <div className="routine-activities" key={id}>
-                              <div className="routine-activities-name">
-                                Name: {name}
-                              </div>
-                              <div className="routine-activities-description">
-                                Description: {description}
-                              </div>
-                              <div className="routine-activities-duration">
-                                Duration: {duration}
-                              </div>
-                              <div className="routine-activities-count">
-                                Count: {count}
-                              </div>
-                            </div>
-                          </>
-                        );
-                      })
-                    ) : (
-                      <div> There are no activities for this routine. </div>
-                    )}
+                    <SingleActivity activities={activities}/>
                   </div>
                   <div className="my-routines-delete">
                     <Button
