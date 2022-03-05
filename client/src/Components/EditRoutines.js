@@ -9,7 +9,7 @@ import Button from "react-bootstrap/Button";
 // be able to update the duration or count of any activity on the routine
 // be able to remove any activity from the routine
 
-const EditRoutines = ({ token }) => {
+const EditRoutines = ({ token, activities, setActivities }) => {
   const [name, setName] = useState("");
   const [goal, setGoal] = useState("");
   const [isPublic, setIsPublic] = useState(false);
@@ -17,13 +17,14 @@ const EditRoutines = ({ token }) => {
   const [activitiesDescription, setActivitiesDescription] = useState("");
   const [count, setCount] = useState("");
   const [duration, setDuration] = useState("");
-  const [activities, setActivities] = useState([]);
+
   const [routineActivity, setRoutineActivity] = useState([]);
 
   const handleActivities = async () => {
     try {
       const newActivities = await fetchActivities();
       setActivities(newActivities);
+      console.log("newActivities", newActivities);
     } catch (error) {
       console.error(error);
     }
@@ -42,12 +43,17 @@ const EditRoutines = ({ token }) => {
         count,
         token
       );
-      console.log("newRoutine", newRoutineActivity);
+      console.log("newRoutineActivity", newRoutineActivity);
       setRoutineActivity([...routineActivity, newRoutineActivity]);
     } catch (error) {
       console.error(error);
     }
   };
+
+  useEffect(() => {
+    handleActivities();
+  }, [token]);
+
   return (
     <>
       <div className="add-a-routin-activity">
@@ -56,24 +62,30 @@ const EditRoutines = ({ token }) => {
           className="new-routine-activity-form"
           onSubmit={handleRoutineActivitySubmit}
         >
-          <select id="name-input">
-            <option> </option>
-          </select>
+            <select id="activities-name-option">
+              {activities.map((activity) => {
+                const { activitiesName } = activity;
+                return (
+                  <>
+                    <option>{activitiesName}</option>
+                  </>
+                );
+              })}
+            </select>
           <input
-            id="goal-input"
+            id="count-input"
             type="text"
-            placeholder="Goal*"
-            onChange={(event) => setGoal(event.target.value)}
+            placeholder="count*"
+            onChange={(event) => setCount(event.target.value)}
             required
           />
           <input
-            id="checkbox"
-            type="checkbox"
-            value={isPublic}
-            onChange={(event) => setIsPublic(event.target.checked)}
+            id="duration-input"
+            type="text"
+            placeholder="duration*"
+            onChange={(event) => setDuration(event.target.checked)}
           />
-          <label htmlFor="checkbox">Public</label>
-          <button id="create-button">CREATE</button>
+          <Button id="submit-button">Submit</Button>
         </form>
       </div>
     </>

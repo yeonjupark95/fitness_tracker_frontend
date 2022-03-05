@@ -17,6 +17,7 @@ const App = () => {
   const [user, setUser] = useState({});
   const navigate = useNavigate();
   const [routines, setRoutines] = useState([]);
+  const [activities, setActivities] = useState([]);
 
   const handleUser = async () => {
     const userObject = await callApi({
@@ -91,7 +92,16 @@ const App = () => {
             </>
           }
         />
-        <Route path="/routines/:ROUTINE_ID/edit" element={<EditRoutines />} />
+        <Route
+          path="/routines/:ROUTINE_ID/edit"
+          element={
+            <EditRoutines
+              token={token}
+              activities={activities}
+              setActivities={setActivities}
+            />
+          }
+        />
       </Routes>
     </>
   );
