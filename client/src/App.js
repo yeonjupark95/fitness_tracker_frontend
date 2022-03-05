@@ -56,7 +56,7 @@ const App = () => {
         <Container>
           <Navbar.Brand href="/">Fitness Trac.kr</Navbar.Brand>
           <Nav className="nav-items">
-            <Nav.Link href="/">Home</Nav.Link>
+            {token &&<Nav.Link href="/">Home</Nav.Link>}
             <Nav.Link href="/routines">Routines</Nav.Link>
             <Nav.Link href="/activities">Activities</Nav.Link>
             {token && <Nav.Link href="/myroutines">My Routines</Nav.Link>}

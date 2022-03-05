@@ -5,7 +5,7 @@ const Home = ({token}) => {
   
   return <>
     {!token && <h1>Welcome to Fitness Trackr!</h1>}
-    { <Link to="/profile">View Profile</Link>}
+    {!token &&<Link to="/myroutines">My Routines</Link>}
   </>
 }
 
