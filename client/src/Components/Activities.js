@@ -3,11 +3,8 @@ import { useState, useEffect } from "react";
 import SingleActivity from "./SingleActivity";
 
 const Activities = ({ token, activities, setActivities }) => {
-  // const [activities, setActivities] = useState([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [duration, setDuration] = useState("");
-  const [count, setCount] = useState("");
 
   const handleActivities = async () => {
     try {
@@ -22,12 +19,9 @@ const Activities = ({ token, activities, setActivities }) => {
   const handleActivitySubmit = async (event) => {
     try {
       event.preventDefault();
-      console.log("hello");
       const newActivity = await createActivity(
         name,
         description,
-        duration,
-        count,
         token
       );
       console.log("newActivity", newActivity);
