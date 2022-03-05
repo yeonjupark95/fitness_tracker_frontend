@@ -1,12 +1,10 @@
 import Button from "react-bootstrap/Button";
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { editRoutine, fetchRoutines, fetchActivities } from "../api";
+import { useNavigate } from "react-router-dom";
+import { editRoutine, fetchRoutines } from "../api";
 
-const EditRoutineForm = ({ token, routines, setRoutines }) => {
-  const params = useParams();
+const EditRoutineForm = ({ token, routines, setRoutines, routineId }) => {
   const [routineToEdit, setRoutineToEdit] = useState([]);
-  const { id } = params;
   const navigate = useNavigate();
 
   const handleRoutines = async () => {
@@ -23,7 +21,7 @@ const EditRoutineForm = ({ token, routines, setRoutines }) => {
   const handleEdit = async (event) => {
     try {
       event.preventDefault();
-      const newRoutine = await editRoutine(id, routineToEdit, token);
+      const newRoutine = await editRoutine(routineId, routineToEdit, token);
       setRoutineToEdit(newRoutine);
       navigate("/myroutines");
     } catch (error) {
@@ -31,35 +29,41 @@ const EditRoutineForm = ({ token, routines, setRoutines }) => {
     }
   };
 
-
   useEffect(() => {
     handleRoutines();
   }, [token]);
 
-  for (let i = 0; i < routines.length; i++) {
-    if (routines[i].id === id) {
-      const routineName = routines[i].name;
-      const routineGoal = routines[i].goal;
-    }
-  }
+  console.log("routineID", routineId);
   return (
     <div className="edit-a-routine">
       <div className="new-routine-form-title"> EDIT YOUR ROUTINE </div>
       <form className="edit-routine-form">
-        <input
-          id="name-input"
-          type="text"
-          placeholder="Name*"
-          // onChange={(event) => setName(event.target.value)}
-          required
-        />
-        <input
-          id="goal-input"
-          type="text"
-          placeholder="Goal*"
-          // onChange={(event) => setGoal(event.target.value)}
-          required
-        />
+        {routines.map((routine) => {
+          const { id, name, goal } = routine;
+          return (
+            <>
+              {id == routineId && (
+                <>
+                  <input
+                    id="name-input"
+                    type="text"
+                    defaultValue={name}
+                    // onChange={(event) => setName(event.target.value)}
+                    required
+                  />
+                  <input
+                    id="goal-input"
+                    type="text"
+                    placeholder="Goal*"
+                    defaultValue={goal}
+                    // onChange={(event) => setGoal(event.target.value)}
+                    required
+                  />
+                </>
+              )}
+            </>
+          );
+        })}
         <Button
           id="submit-button"
           onClick={() => {
@@ -71,7 +75,6 @@ const EditRoutineForm = ({ token, routines, setRoutines }) => {
       </form>
     </div>
   );
-//   return null;
 };
 
 export default EditRoutineForm;

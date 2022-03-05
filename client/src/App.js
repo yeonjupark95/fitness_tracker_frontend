@@ -13,7 +13,6 @@ import {
   Routines,
   Activities,
   MyRoutines,
-  AddActivityToRoutine,
   EditRoutine,
 } from "./Components";
 
