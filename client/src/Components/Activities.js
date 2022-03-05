@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import SingleActivity from "./SingleActivity";
 
 const Activities = ({ token, activities, setActivities }) => {
-  // const [activities, setActivities] = useState([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [duration, setDuration] = useState("");

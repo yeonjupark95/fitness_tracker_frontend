@@ -1,17 +1,25 @@
-const SingleActivity = ({activities}) => {
+const SingleActivity = ({ activities }) => {
   return (
     <div className="activities-wrapper">
       <h2>Activities</h2>
       {activities.length ? (
         activities.length > 0 &&
         activities.map((activity) => {
-          const { id, name, description } = activity;
+          const { id, name, description, duration, count } = activity;
           return (
             <>
               <div className="activities" key={id}>
                 <div className="activities-name"> {name} </div>
                 <div className="activities-description"> {description} </div>
               </div>
+              {duration && (
+                <div className="routine-activities-duration">
+                  Duration: {duration}
+                </div>
+              )}
+              {count && (
+                <div className="routine-activities-count">Count: {count}</div>
+              )}
             </>
           );
         })
