@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Routes, Route, Link } from "react-router-dom";
+import { callApi } from "./api";
 import "./App.css";
 
 import {
@@ -17,11 +18,26 @@ const App = () => {
   const navigate = useNavigate();
   const [routines, setRoutines] = useState([]);
 
+  const handleUser = async () => {
+    const userObject = await callApi({
+      url: `/users/me`,
+      method: "GET",
+      token,
+    });
+    setUser(userObject);
+  };
+
   useEffect(() => {
     if (localStorage.getItem("token")) {
       setToken(localStorage.getItem("token"));
     }
   }, []);
+
+  useEffect(() => {
+    if (token) {
+      handleUser();
+    }
+  }, [token]);
 
   return (
     <>
@@ -53,7 +69,13 @@ const App = () => {
         />
         <Route
           path="/routines"
-          element={<Routines routines={routines} setRoutines={setRoutines} />}
+          element={
+            <Routines
+              routines={routines}
+              setRoutines={setRoutines}
+              token={token}
+            />
+          }
         />
         <Route path="/activities" element={<Activities />} />
         <Route

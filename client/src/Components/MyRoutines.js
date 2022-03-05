@@ -32,16 +32,8 @@ const MyRoutines = ({ token, routines, setRoutines, user }) => {
   const handleRoutineSubmit = async (event) => {
     try {
       event.preventDefault();
-      const newRoutines = await createRoutine(
-        name,
-        goal,
-        isPublic,
-        activitiesName,
-        activitiesDescription,
-        duration,
-        count,
-        token
-      );
+      console.log("myRoutines token", token);
+      const newRoutines = await createRoutine(name, goal, isPublic, token);
       console.log("newRoutine", newRoutines);
       setRoutines([...routines, newRoutines]);
     } catch (error) {
@@ -99,9 +91,9 @@ const MyRoutines = ({ token, routines, setRoutines, user }) => {
       <div className="my-routines">
         {routines.length > 0 &&
           routines.map((routine) => {
-            const { id, isPublic, name, goal, creatorName, activities } =
+            const { id, isPublic, name, goal, creatorId, activities } =
               routine;
-            if (user.username === creatorName) {
+            if (user.id === creatorId) {
               return (
                 <>
                   <div className="my-routines-routine" key={id}>
@@ -113,7 +105,7 @@ const MyRoutines = ({ token, routines, setRoutines, user }) => {
                     <h5> Activities: </h5>
                   </div>
                   <div className="my-routines-activities">
-                    {activities.length ? (
+                    {activities ? (
                       activities.length > 0 &&
                       activities.map((activity) => {
                         const { id, name, description, duration, count } =
