@@ -10,18 +10,12 @@ import Button from "react-bootstrap/Button";
 // be able to remove any activity from the routine
 
 const EditRoutines = ({ token, activities, setActivities }) => {
-  const [name, setName] = useState("");
-  const [goal, setGoal] = useState("");
-  const [isPublic, setIsPublic] = useState(false);
-  const [activitiesName, setActivitiesName] = useState("");
   const [activityId, setActivityId] = useState(0);
-  const [activitiesDescription, setActivitiesDescription] = useState("");
   const [count, setCount] = useState("");
   const [duration, setDuration] = useState("");
   const navigate = useNavigate();
   const params = useParams();
   const [routineActivity, setRoutineActivity] = useState([]);
-
   const { ROUTINE_ID } = useParams();
 
   const handleActivities = async () => {

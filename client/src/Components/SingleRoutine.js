@@ -1,57 +1,61 @@
+import Card from "react-bootstrap/Card";
+
 const SingleRoutine = ({ routines }) => {
   return (
-    <div className="routines-wrapper">
+    <>
       <h2>Routines</h2>
-      {routines.length ? (
-        routines.length > 0 &&
-        routines.map(
-          ({ id, isPublic, name, goal, creatorName, activities }) => {
-            return (
-              <>
-                {isPublic && (
-                  <div className="routines" key={id}>
-                    <div className="routines-name">{name}</div>
-                    <div className="routines-creator-name">
-                      Creator: {creatorName}
+      <div className="routines-wrapper">
+        {routines.length ? (
+          routines.length > 0 &&
+          routines.map(
+            ({ id, isPublic, name, goal, creatorName, activities }) => {
+              return (
+                <Card className="single-routine-card" border="secondary">
+                  {isPublic && (
+                    <div className="routines" key={id}>
+                      <Card.Header id="routines-name">
+                        {name} by {creatorName}{" "}
+                      </Card.Header>
+                      <Card.Title id="routines-goal">{goal}</Card.Title>
+                      <h5 id="routine-activities">Activities</h5>
                     </div>
-                    <div className="routines-goal">{goal}</div>
-                    <h5> Activities: </h5>
-                  </div>
-                )}
-                {activities.length ? (
-                  activities.length > 0 &&
-                  activities.map((activity) => {
-                    const { id, name, description, duration, count } = activity;
-                    return (
-                      <>
-                        <div className="routine-activities" key={id}>
-                          <div className="routine-activities-name">
-                            Name: {name}{" "}
+                  )}
+                  {activities.length ? (
+                    activities.length > 0 &&
+                    activities.map((activity) => {
+                      const { id, name, description, duration, count } =
+                        activity;
+                      return (
+                        <>
+                          <div className="routine-activities" key={id}>
+                            <Card.Text id="routine-activities-name">
+                              Name: {name}
+                            </Card.Text>
+                            <Card.Text id="routine-activities-description">
+                              Description: {description}
+                            </Card.Text>
+                            <Card.Text id="routine-activities-duration">
+                              Duration: {duration}
+                            </Card.Text>
+                            <Card.Text id="routine-activities-count">
+                              Count: {count}
+                            </Card.Text>
                           </div>
-                          <div className="routine-activities-description">
-                            Description: {description}{" "}
-                          </div>
-                          <div className="routine-activities-duration">
-                            Duration: {duration}{" "}
-                          </div>
-                          <div className="routine-activities-count">
-                            Count: {count}{" "}
-                          </div>
-                        </div>
-                      </>
-                    );
-                  })
-                ) : (
-                  <div> There are no activities for this routine. </div>
-                )}
-              </>
-            );
-          }
-        )
-      ) : (
-        <h5> There are no routines to display. </h5>
-      )}
-    </div>
+                        </>
+                      );
+                    })
+                  ) : (
+                    <div> There are no activities for this routine. </div>
+                  )}
+                </Card>
+              );
+            }
+          )
+        ) : (
+          <h5> There are no routines to display. </h5>
+        )}
+      </div>
+    </>
   );
 };
 
