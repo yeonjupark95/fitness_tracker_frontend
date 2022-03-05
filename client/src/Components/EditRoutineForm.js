@@ -26,7 +26,7 @@ const EditRoutineForm = ({ token, routines, setRoutines, routineId }) => {
       setRoutineToEdit(newRoutine);
       navigate("/myroutines");
     } catch (error) {
-      console.erorr(error);
+      console.error(error);
     }
   };
 

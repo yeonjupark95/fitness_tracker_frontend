@@ -215,7 +215,7 @@ export const createActivityToRoutine = async (
 
 export const editRoutine = async (id, routine, token) => {
   try {
-    const response = await fetch(`${BASE_URL}routines/${id}/`, {
+    const response = await fetch(`${BASE_URL}routines/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
