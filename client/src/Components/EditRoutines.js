@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { createRoutineActivity, fetchActivities } from "../api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 // for each routine which is owned by me I should
 // be able to update the name and goal for the routine
@@ -17,22 +17,21 @@ const EditRoutines = ({ token, activities, setActivities }) => {
   const [activitiesDescription, setActivitiesDescription] = useState("");
   const [count, setCount] = useState("");
   const [duration, setDuration] = useState("");
-
+  const navigate = useNavigate();
+  const params = useParams();
   const [routineActivity, setRoutineActivity] = useState([]);
 
   const handleActivities = async () => {
     try {
-      const newActivities = await fetchActivities();
-      setActivities(newActivities);
-      console.log("newActivities", newActivities);
+      const activities = await fetchActivities();
+      setActivities(activities);
     } catch (error) {
       console.error(error);
     }
   };
 
-  const handleRoutineActivitySubmit = async (event) => {
+  const handleRoutineActivitySubmit = async () => {
     try {
-      event.preventDefault();
       const newRoutineActivity = await createRoutineActivity(
         name,
         goal,
@@ -43,12 +42,14 @@ const EditRoutines = ({ token, activities, setActivities }) => {
         count,
         token
       );
-      console.log("newRoutineActivity", newRoutineActivity);
       setRoutineActivity([...routineActivity, newRoutineActivity]);
+      navigate("/myroutines");
     } catch (error) {
       console.error(error);
     }
   };
+
+  console.log("activities", activities);
 
   useEffect(() => {
     handleActivities();
@@ -57,21 +58,17 @@ const EditRoutines = ({ token, activities, setActivities }) => {
   return (
     <>
       <div className="add-a-routin-activity">
-        <div className="new-routine-activity-form-title"> ADD ACTIVITY </div>
+        <div className="new-routine-activity-form-title"> ADD ACTIVITY TO  </div>
         <form
           className="new-routine-activity-form"
           onSubmit={handleRoutineActivitySubmit}
         >
-            <select id="activities-name-option">
-              {activities.map((activity) => {
-                const { activitiesName } = activity;
-                return (
-                  <>
-                    <option>{activitiesName}</option>
-                  </>
-                );
-              })}
-            </select>
+          <select id="activities-name-option">
+            {activities.map((activity) => {
+              const { name } = activity;
+              return <option value={name}>{name}</option>;
+            })}
+          </select>
           <input
             id="count-input"
             type="text"
@@ -85,7 +82,14 @@ const EditRoutines = ({ token, activities, setActivities }) => {
             placeholder="duration*"
             onChange={(event) => setDuration(event.target.checked)}
           />
-          <Button id="submit-button">Submit</Button>
+          <Button
+            id="submit-button"
+            onClick={() => {
+              handleRoutineActivitySubmit();
+            }}
+          >
+            Submit
+          </Button>
         </form>
       </div>
     </>

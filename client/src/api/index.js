@@ -218,8 +218,7 @@ export const createRoutineActivity = async (
       }),
     });
     const routineActivity = await response.json();
-    console.log("you created a routine activity");
-    console.log("token:", token);
+    console.log("you created a routine activity", routineActivity);
     return routineActivity;
   } catch (error) {
     console.error(error);
