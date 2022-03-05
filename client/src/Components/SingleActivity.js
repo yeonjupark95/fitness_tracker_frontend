@@ -1,6 +1,4 @@
 const SingleActivity = ({activities}) => {
-    console.log("activities from single activities", activities);
-    console.log("activitieslength",activities.length)
   return (
     <div className="activities-wrapper">
       <h2>Activities</h2>
@@ -18,7 +16,7 @@ const SingleActivity = ({activities}) => {
           );
         })
       ) : (
-        <h5> There are no Activities to display! </h5>
+        <h5> There are no activitiies to display! </h5>
       )}
     </div>
   );

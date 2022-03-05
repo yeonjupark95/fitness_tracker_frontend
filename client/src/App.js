@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
-import { useNavigate, Routes, Route, Link } from "react-router-dom";
+import { useNavigate, Routes, Route } from "react-router-dom";
 import { callApi } from "./api";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
-import Button from "react-bootstrap/Button";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import "./App.css";
 
@@ -55,11 +54,11 @@ const App = () => {
     <>
       <Navbar className="navbar" bg="light" variant="light">
         <Container>
-          <Navbar.Brand to="/home">Fitness Trac.kr</Navbar.Brand>
+          <Navbar.Brand href="/">Fitness Trac.kr</Navbar.Brand>
           <Nav className="nav-items">
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/routines">Routines</Nav.Link>
-            <Nav.Link href="/regionactivities">Activities</Nav.Link>
+            <Nav.Link href="/activities">Activities</Nav.Link>
             {token && <Nav.Link href="/myroutines">My Routines</Nav.Link>}
             {!token && <Nav.Link href="/account/login">Login</Nav.Link>}
             {token && (
