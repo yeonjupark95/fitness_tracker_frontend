@@ -14,10 +14,10 @@ export const callApi = async ({ url, method, token, body }) => {
       options.headers["Authorization"] = `Bearer ${token}`;
     }
     const response = await fetch(BASE_URL + url, options);
-    console.log("this is the response", response)
+    console.log("this is the response", response);
     const data = await response.json();
-    console.log(data.message)
-    console.log("this is the data", data)
+    console.log(data.message);
+    console.log("this is the data", data);
 
     return data;
   } catch (error) {
@@ -85,7 +85,7 @@ export const login = async (username, password) => {
     const result = await response.json();
     console.log(result);
   } catch (error) {
-    console.dir(error)
+    console.dir(error);
     console.error(error);
   }
 };
@@ -233,6 +233,22 @@ export const editRoutine = async (id, routine, token) => {
     console.log("you edited Routine", editRoutine);
     console.log("you created a routine activity token", token);
     return editRoutine;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const deleteRoutineActivity = async (token, routineIdToDelete) => {
+  try {
+    const response = await fetch(`${BASE_URL}/routines/${routineIdToDelete}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const { success } = await response.json();
+    return success;
   } catch (error) {
     console.error(error);
   }
