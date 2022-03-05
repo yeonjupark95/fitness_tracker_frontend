@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { createRoutineActivity, fetchActivities } from "../api";
-import { useNavigate } from "react-router-dom";
+import { createActivityToRoutine, fetchActivities } from "../api";
+import { useNavigate, useParams } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 // for each routine which is owned by me I should
 // be able to update the name and goal for the routine
@@ -9,71 +9,94 @@ import Button from "react-bootstrap/Button";
 // be able to update the duration or count of any activity on the routine
 // be able to remove any activity from the routine
 
-const EditRoutines = ({ token }) => {
+const EditRoutines = ({ token, activities, setActivities }) => {
   const [name, setName] = useState("");
   const [goal, setGoal] = useState("");
   const [isPublic, setIsPublic] = useState(false);
   const [activitiesName, setActivitiesName] = useState("");
+  const [activityId, setActivityId] = useState(0);
   const [activitiesDescription, setActivitiesDescription] = useState("");
   const [count, setCount] = useState("");
   const [duration, setDuration] = useState("");
-  const [activities, setActivities] = useState([]);
+  const navigate = useNavigate();
+  const params = useParams();
   const [routineActivity, setRoutineActivity] = useState([]);
+
+  const { ROUTINE_ID } = useParams();
 
   const handleActivities = async () => {
     try {
-      const newActivities = await fetchActivities();
-      setActivities(newActivities);
+      const activities = await fetchActivities();
+      setActivities(activities);
     } catch (error) {
       console.error(error);
     }
   };
 
-  const handleRoutineActivitySubmit = async (event) => {
+  const handleRoutineActivitySubmit = async () => {
     try {
-      event.preventDefault();
-      const newRoutineActivity = await createRoutineActivity(
-        name,
-        goal,
-        isPublic,
-        activitiesName,
-        activitiesDescription,
+      console.log("activityId", activityId);
+      const newRoutineActivity = await createActivityToRoutine(
+        activityId,
+        ROUTINE_ID,
         duration,
         count,
         token
       );
-      console.log("newRoutine", newRoutineActivity);
       setRoutineActivity([...routineActivity, newRoutineActivity]);
+      navigate("/myroutines");
     } catch (error) {
       console.error(error);
     }
   };
+
+  console.log("activities", activities);
+
+  useEffect(() => {
+    handleActivities();
+  }, [token]);
+
   return (
     <>
       <div className="add-a-routin-activity">
-        <div className="new-routine-activity-form-title"> ADD ACTIVITY </div>
+        <div className="new-routine-activity-form-title"> ADD ACTIVITY TO </div>
         <form
           className="new-routine-activity-form"
           onSubmit={handleRoutineActivitySubmit}
         >
-          <select id="name-input">
-            <option> </option>
+          <select
+            id="activities-name-option"
+            value={activityId}
+            onChange={(event) => {
+              setActivityId(event.target.value);
+            }}
+          >
+            {activities.map((activity) => {
+              const { name, id } = activity;
+              return <option value={id}>{name}</option>;
+            })}
           </select>
           <input
-            id="goal-input"
+            id="count-input"
             type="text"
-            placeholder="Goal*"
-            onChange={(event) => setGoal(event.target.value)}
+            placeholder="count*"
+            onChange={(event) => setCount(event.target.value)}
             required
           />
           <input
-            id="checkbox"
-            type="checkbox"
-            value={isPublic}
-            onChange={(event) => setIsPublic(event.target.checked)}
+            id="duration-input"
+            type="text"
+            placeholder="duration*"
+            onChange={(event) => setDuration(event.target.value)}
           />
-          <label htmlFor="checkbox">Public</label>
-          <button id="create-button">CREATE</button>
+          <Button
+            id="submit-button"
+            onClick={() => {
+              handleRoutineActivitySubmit();
+            }}
+          >
+            Submit
+          </Button>
         </form>
       </div>
     </>
