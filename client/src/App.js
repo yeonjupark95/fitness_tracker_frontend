@@ -1,6 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Routes, Route, Link } from "react-router-dom";
 import { callApi } from "./api";
+import Navbar from "react-bootstrap/Navbar";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Button from "react-bootstrap/Button";
+import NavDropdown from "react-bootstrap/NavDropdown";
 import "./App.css";
 
 import {
@@ -28,6 +33,12 @@ const App = () => {
     setUser(userObject);
   };
 
+  const handleLogOut = () => {
+    setToken("");
+    localStorage.removeItem("token");
+    navigate("/");
+  };
+
   useEffect(() => {
     if (localStorage.getItem("token")) {
       setToken(localStorage.getItem("token"));
@@ -42,23 +53,29 @@ const App = () => {
 
   return (
     <>
-      {token && <h2>Hello, {user.username}</h2>}
-      {token && <Link to="/">Home</Link>}
-      {!token && <Link to="/account/login">Login</Link>}
-      <Link to="/routines">Routines</Link>
-      <Link to="/activities">Activities</Link>
-      <Link to="/myroutines">My Routines</Link>
-      {token && (
-        <button
-          onClick={() => {
-            setToken("");
-            localStorage.removeItem("token");
-            navigate("/");
-          }}
-        >
-          Log Out
-        </button>
-      )}
+      <Navbar className="navbar" bg="light" variant="light">
+        <Container>
+          <Navbar.Brand to="/home">Fitness Trac.kr</Navbar.Brand>
+          <Nav className="nav-items">
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/routines">Routines</Nav.Link>
+            <Nav.Link href="/regionactivities">Activities</Nav.Link>
+            {token && <Nav.Link href="/myroutines">My Routines</Nav.Link>}
+            {!token && <Nav.Link href="/account/login">Login</Nav.Link>}
+            {token && (
+              <NavDropdown
+                title={`Hi ${user.username}`}
+                id="basic-nav-dropdown"
+              >
+                <NavDropdown.Item id="sign-out" onClick={handleLogOut}>
+                  SIGN OUT
+                </NavDropdown.Item>
+              </NavDropdown>
+            )}
+          </Nav>
+        </Container>
+      </Navbar>
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route
@@ -77,7 +94,16 @@ const App = () => {
             />
           }
         />
-        <Route path="/activities" element={<Activities token={token} activities={activities} setActivities={setActivities}/>} />
+        <Route
+          path="/activities"
+          element={
+            <Activities
+              token={token}
+              activities={activities}
+              setActivities={setActivities}
+            />
+          }
+        />
         <Route
           path="/myroutines"
           element={
