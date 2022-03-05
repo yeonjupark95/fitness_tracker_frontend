@@ -22,6 +22,7 @@ const EditRoutineForm = ({ token, routines, setRoutines, routineId }) => {
     try {
       event.preventDefault();
       const newRoutine = await editRoutine(routineId, routineToEdit, token);
+      console.log("you clicked handle Edit");
       setRoutineToEdit(newRoutine);
       navigate("/myroutines");
     } catch (error) {
@@ -37,7 +38,7 @@ const EditRoutineForm = ({ token, routines, setRoutines, routineId }) => {
   return (
     <div className="edit-a-routine">
       <div className="new-routine-form-title"> EDIT YOUR ROUTINE </div>
-      <form className="edit-routine-form">
+      <form className="edit-routine-form" onSubmit={handleEdit}>
         {routines.map((routine) => {
           const { id, name, goal } = routine;
           return (
@@ -59,19 +60,19 @@ const EditRoutineForm = ({ token, routines, setRoutines, routineId }) => {
                     // onChange={(event) => setGoal(event.target.value)}
                     required
                   />
+                  <button
+                    id="submit-button"
+                    onClick={() => {
+                      handleEdit();
+                    }}
+                  >
+                    Submit
+                  </button>
                 </>
               )}
             </>
           );
         })}
-        <Button
-          id="submit-button"
-          onClick={() => {
-            handleEdit();
-          }}
-        >
-          Submit
-        </Button>
       </form>
     </div>
   );
