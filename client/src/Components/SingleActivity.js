@@ -20,7 +20,7 @@ const SingleActivity = ({ activities }) => {
           );
         })
       ) : (
-        <h5> There are no activitiies to display! </h5>
+        <h5> There are no activities to display! </h5>
       )}
     </div>
   );

@@ -27,12 +27,12 @@ const SingleRoutine = ({ routines }) => {
                         activity;
                       return (
                         <>
-                          <div className="routine-activities" key={id}>
-                            <Card.Text id="routine-activities-name">
-                              Name: {name}
+                          <div className="routine-activities"  key={id}>
+                            <Card.Text id="activities-name">
+                              {name}
                             </Card.Text>
-                            <Card.Text id="routine-activities-description">
-                              Description: {description}
+                            <Card.Text id="activities-description">
+                              {description}
                             </Card.Text>
                             <Card.Text id="routine-activities-duration">
                               Duration: {duration}

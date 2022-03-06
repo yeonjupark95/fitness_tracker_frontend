@@ -67,3 +67,8 @@ h5 {
 .add-a-routine-card {
   margin-bottom: 2rem;
 }
+
+#routine-activities-title {
+  font-size: 25px;
+  font-weight: 600;
+}
