@@ -57,6 +57,7 @@ const Activities = ({ token, activities, setActivities }) => {
           <button id="create-button">CREATE</button>
         </form>
       </div>
+      <h5>Activities</h5>
       <SingleActivity activities={activities} />
     </>
   );

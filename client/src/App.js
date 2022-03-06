@@ -13,7 +13,7 @@ import {
   Routines,
   Activities,
   MyRoutines,
-  EditRoutine
+  EditRoutine,
 } from "./Components";
 
 const App = () => {
@@ -56,7 +56,7 @@ const App = () => {
         <Container>
           <Navbar.Brand href="/">Fitness Trac.kr</Navbar.Brand>
           <Nav className="nav-items">
-            {token &&<Nav.Link href="/">Home</Nav.Link>}
+            {token && <Nav.Link href="/">Home</Nav.Link>}
             <Nav.Link href="/routines">Routines</Nav.Link>
             <Nav.Link href="/activities">Activities</Nav.Link>
             {token && <Nav.Link href="/myroutines">My Routines</Nav.Link>}

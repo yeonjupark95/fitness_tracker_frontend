@@ -7,7 +7,6 @@ const SingleActivity = ({ activities }) => {
           const { id, name, description, duration, count } = activity;
           return (
             <>
-              <h5>Activities</h5>
               <div className="activities" key={id}>
                 <div className="activities-name"> {name} </div>
                 <div className="activities-description"> {description} </div>

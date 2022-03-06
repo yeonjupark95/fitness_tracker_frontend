@@ -1,22 +1,38 @@
 import { useNavigate } from "react-router-dom";
+import { deleteRoutineActivity } from "../api";
 
-const RoutineActivities = ({ routineToEdit }) => {
-  const navigate = useNavigate();
+const RoutineActivities = ({ routineToEdit, setActivities, token, user }) => {
+const navigate = useNavigate();
 
-  const routineActivity = routineToEdit.activities;
-  if (!routineActivity) {
+  const routineActivities = routineToEdit.activities;
+  if (!routineActivities) {
     navigate("/myroutines");
     return <div>Loading...</div>;
   }
 
-  console.log("routineActivity", routineActivity);
+  console.log("routineToEdit", routineToEdit);
+  console.log("routineActivities", routineActivities);
+
+  const handleRADelete = async (routineActivityId) => {
+    try {
+      const success = await deleteRoutineActivity(token, routineActivityId);
+      if (success) {
+        const newRoutineActivities = routineActivities.filter(
+          (routineActivity) => routineActivity.id !== routineActivityId
+        );
+        setActivities(newRoutineActivities);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="edit-a-routine-activity">
       <div className="new-routine-activity-form-title"> ACTIVITIES </div>
-      {routineActivity.length ? (
-        routineActivity.length > 0 &&
-        routineActivity.map(({ name, description, count, duration }) => {
+      {routineActivities.length ? (
+        routineActivities.length > 0 &&
+        routineActivities.map(({ id, name, description, count, duration }) => {
           return (
             <>
               <div className="routine-activity-to-edit">{name} </div>
@@ -24,12 +40,21 @@ const RoutineActivities = ({ routineToEdit }) => {
               <div>Count: {count}</div>
               <div>Duration: {duration}</div>
               <button>Edit</button>
-              <button>Delete</button>
+              <button
+                onClick={() => {
+                  handleRADelete(id);
+                }}
+              >
+                Delete
+              </button>
             </>
           );
         })
       ) : (
-        <div> Add activities to your routine </div>
+        <div>
+          There are currently no activities for this routine. Add activities to
+          your routine!
+        </div>
       )}
     </div>
   );

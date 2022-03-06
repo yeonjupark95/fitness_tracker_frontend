@@ -1,5 +1,4 @@
-// import axios from "axios";
-const BASE_URL = "https://secret-fjord-65669.herokuapp.com/api/";
+const BASE_URL = "https://secret-fjord-65669.herokuapp.com/api";
 
 export const callApi = async ({ url, method, token, body }) => {
   try {
@@ -43,8 +42,6 @@ export const fetchRoutines = async (token) => {
   } catch (error) {
     console.error(error);
   }
-  // const {response} = await axios.get(`${BASE_URL}/routines`);
-  // return response;
 };
 
 export const fetchActivities = async (token) => {
@@ -194,7 +191,7 @@ export const createActivityToRoutine = async (
 ) => {
   try {
     const response = await fetch(
-      `${BASE_URL}routines/${routineId}/activities`,
+      `${BASE_URL}/routines/${routineId}/activities`,
       {
         method: "POST",
         headers: {
@@ -219,7 +216,7 @@ export const createActivityToRoutine = async (
 
 export const editRoutine = async (id, routine, token) => {
   try {
-    const response = await fetch(`${BASE_URL}routines/${id}`, {
+    const response = await fetch(`${BASE_URL}/routines/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -238,9 +235,9 @@ export const editRoutine = async (id, routine, token) => {
   }
 };
 
-export const deleteRoutineActivity = async (token, routineIdToDelete) => {
+export const deleteRoutineActivity = async (token, routineActivityId) => {
   try {
-    const response = await fetch(`${BASE_URL}/routines/${routineIdToDelete}`, {
+    const response = await fetch(`${BASE_URL}/routine_activities/${routineActivityId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -248,7 +245,25 @@ export const deleteRoutineActivity = async (token, routineIdToDelete) => {
       },
     });
     const { success } = await response.json();
+    console.log("you deleted RA:", success)
     return success;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const editRoutineActivity = async (token, routineActivityId, routineActivity, {count, duration}) => {
+  try {
+    const response = await fetch(`${BASE_URL}/routine_activities/${routineActivityId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(
+        routineActivity
+      ),
+    });
   } catch (error) {
     console.error(error);
   }
