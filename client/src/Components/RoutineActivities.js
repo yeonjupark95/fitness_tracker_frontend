@@ -1,11 +1,17 @@
+import { useNavigate } from "react-router-dom";
+
 const RoutineActivities = ({ routineToEdit }) => {
+  const navigate = useNavigate();
   if (!routineToEdit) {
     return <div>Loading...</div>;
   }
-  const routineToEditVals = Object.values(routineToEdit);
-  const routineActivity = routineToEditVals[6];
-  console.log("routinetoeditvalues", routineToEditVals);
-  console.log("routinetactivity", routineActivity);
+
+  const routineActivity = routineToEdit.activities;
+  if (!routineActivity){
+    navigate("/myroutines");
+    return <div>Loading...</div>;
+  }
+  console.log("routineActivity", routineActivity)
 
   return (
     <div className="edit-a-routine-activity">
@@ -25,5 +31,6 @@ const RoutineActivities = ({ routineToEdit }) => {
       <div></div>
     </div>
   );
+  // return null;
 };
 export default RoutineActivities;
