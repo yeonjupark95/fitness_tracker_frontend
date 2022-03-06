@@ -1,8 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import { deleteRoutineActivity } from "../api";
+import { useState } from "react";
+import { deleteRoutineActivity, editRoutineActivity } from "../api";
+import React from "react";
 
-const RoutineActivities = ({ routineToEdit, setActivities, token, user }) => {
-const navigate = useNavigate();
+const RoutineActivities = ({ routineToEdit, setActivities, setRoutines, token }) => {
+  const navigate = useNavigate();
+  const [count, setCount] = useState()
 
   const routineActivities = routineToEdit.activities;
   if (!routineActivities) {
@@ -12,6 +15,7 @@ const navigate = useNavigate();
 
   console.log("routineToEdit", routineToEdit);
   console.log("routineActivities", routineActivities);
+  console.log("RAtoken", token);
 
   const handleRADelete = async (routineActivityId) => {
     try {
@@ -22,6 +26,15 @@ const navigate = useNavigate();
         );
         setActivities(newRoutineActivities);
       }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleRAEdit = async (routineActivityId) => {
+    try {
+      const updatedRA = {};
+      
     } catch (error) {
       console.error(error);
     }
@@ -39,7 +52,13 @@ const navigate = useNavigate();
               <div>{description} </div>
               <div>Count: {count}</div>
               <div>Duration: {duration}</div>
-              <button>Edit</button>
+              <button
+                onClick={() => {
+                  handleRADelete(id);
+                }}
+              >
+                Edit
+              </button>
               <button
                 onClick={() => {
                   handleRADelete(id);

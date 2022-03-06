@@ -32,9 +32,9 @@ const Activities = ({ token, activities, setActivities }) => {
   }, [token]);
 
   return (
-    <>
+    <div className = "activities">
       {token && (
-        <>
+        <div className = "activities-wrapper">
           <div className="add-an-activity">
             <div className="new-activity-form-title"> CREATE AN ACTIVITY </div>
             <form className="new-activity-form" onSubmit={handleActivitySubmit}>
@@ -55,11 +55,11 @@ const Activities = ({ token, activities, setActivities }) => {
               <button id="create-button">CREATE</button>
             </form>
           </div>
-        </>
+        </div>
       )}
-      <h5>Activities</h5>
+      <h2>Activities</h2>
       <SingleActivity activities={activities} />
-    </>
+    </div>
   );
 };
 

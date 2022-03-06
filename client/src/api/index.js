@@ -244,7 +244,7 @@ export const deleteRoutineActivity = async (token, routineActivityId) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    const { success } = await response.json();
+    const {success}  = await response.json();
     console.log("you deleted RA:", success)
     return success;
   } catch (error) {
@@ -252,7 +252,7 @@ export const deleteRoutineActivity = async (token, routineActivityId) => {
   }
 };
 
-export const editRoutineActivity = async (token, routineActivityId, routineActivity, {count, duration}) => {
+export const editRoutineActivity = async (token, routineActivityId, routineActivity) => {
   try {
     const response = await fetch(`${BASE_URL}/routine_activities/${routineActivityId}`, {
       method: "PATCH",
@@ -264,6 +264,8 @@ export const editRoutineActivity = async (token, routineActivityId, routineActiv
         routineActivity
       ),
     });
+    const editRoutineActivity = await response.json();
+    return editRoutineActivity;
   } catch (error) {
     console.error(error);
   }
