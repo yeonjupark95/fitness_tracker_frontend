@@ -1,5 +1,4 @@
 const SingleActivity = ({ activities }) => {
-  console.log("single activities", activities);
   return (
     <div className="activities-wrapper">
       <h5>Activities</h5>

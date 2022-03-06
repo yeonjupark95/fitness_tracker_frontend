@@ -5,8 +5,9 @@ import { editRoutine, fetchRoutines } from "../api";
 
 const EditRoutineForm = ({ token, routines, setRoutines, routineId }) => {
   const [routineToEdit, setRoutineToEdit] = useState(null);
-  const blankRoutine = { name: "", goal: "" };
   const navigate = useNavigate();
+
+  console.log("routinetoEdit", routineToEdit);
 
   const handleRoutines = async () => {
     try {
@@ -23,8 +24,8 @@ const EditRoutineForm = ({ token, routines, setRoutines, routineId }) => {
   }, [token]);
 
   const handleEdit = async (event) => {
+    event.preventDefault();
     try {
-      event.preventDefault();
       const newRoutine = await editRoutine(routineId, routineToEdit, token);
       console.log("you clicked handle Edit");
       setRoutineToEdit(newRoutine);
@@ -40,13 +41,19 @@ const EditRoutineForm = ({ token, routines, setRoutines, routineId }) => {
     });
     setRoutineToEdit(routineToEdit);
   }, [routines]);
-
+if (!routineToEdit){
+  return(
+    <>
+    Loading...
+    </>
+  )
+}
   return (
     <div className="edit-a-routine">
       <div className="new-routine-form-title"> EDIT YOUR ROUTINE </div>
       <form className="edit-routine-form" onSubmit={handleEdit}>
         {routines.map((routine) => {
-          const { id, name, goal } = routine;
+          const { id } = routine;
           return (
             <>
               {id == routineId && (
@@ -54,26 +61,29 @@ const EditRoutineForm = ({ token, routines, setRoutines, routineId }) => {
                   <input
                     id="name-input"
                     type="text"
-                    defaultValue={name}
-                    // onChange={(event) => setName(event.target.value)}
+                    value={routineToEdit.name}
+                    onChange={(event) =>
+                      setRoutineToEdit({
+                        ...routineToEdit,
+                        name: event.target.value,
+                      })
+                    }
                     required
                   />
                   <input
                     id="goal-input"
                     type="text"
                     placeholder="Goal*"
-                    defaultValue={goal}
-                    // onChange={(event) => setGoal(event.target.value)}
+                    value={routineToEdit.goal}
+                    onChange={(event) =>
+                      setRoutineToEdit({
+                        ...routineToEdit,
+                        goal: event.target.value,
+                      })
+                    }
                     required
                   />
-                  <button
-                    id="submit-button"
-                    onClick={() => {
-                      handleEdit();
-                    }}
-                  >
-                    Submit
-                  </button>
+                  <button id="submit-button">Submit</button>
                 </>
               )}
             </>

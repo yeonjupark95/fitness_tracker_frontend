@@ -34,7 +34,9 @@ const EditRoutine = ({
         token={token}
         activities={activities}
         setActivities={setActivities}
-        routineId={ROUTINE_ID}
+        routines={routines}
+        setRoutines={setRoutines}
+        routineIdParam={ROUTINE_ID}
       />
     </>
   );
