@@ -1,9 +1,17 @@
 import Button from "react-bootstrap/Button";
 import { useState, useEffect } from "react";
+import { RoutineActivities } from ".";
 import { useNavigate } from "react-router-dom";
 import { editRoutine, fetchRoutines } from "../api";
 
-const EditRoutineForm = ({ token, routines, setRoutines, routineId }) => {
+const EditRoutineForm = ({
+  token,
+  routines,
+  setRoutines,
+  routineId,
+  activities,
+  setActivities,
+}) => {
   const [routineToEdit, setRoutineToEdit] = useState(null);
   const navigate = useNavigate();
 
@@ -41,56 +49,65 @@ const EditRoutineForm = ({ token, routines, setRoutines, routineId }) => {
     });
     setRoutineToEdit(routineToEdit);
   }, [routines]);
-if (!routineToEdit){
-  return(
-    <>
-    Loading...
-    </>
-  )
-}
+  if (!routineToEdit) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <div className="edit-a-routine">
-      <div className="new-routine-form-title"> EDIT YOUR ROUTINE </div>
-      <form className="edit-routine-form" onSubmit={handleEdit}>
-        {routines.map((routine) => {
-          const { id } = routine;
-          return (
-            <>
-              {id == routineId && (
-                <>
-                  <input
-                    id="name-input"
-                    type="text"
-                    value={routineToEdit.name}
-                    onChange={(event) =>
-                      setRoutineToEdit({
-                        ...routineToEdit,
-                        name: event.target.value,
-                      })
-                    }
-                    required
-                  />
-                  <input
-                    id="goal-input"
-                    type="text"
-                    placeholder="Goal*"
-                    value={routineToEdit.goal}
-                    onChange={(event) =>
-                      setRoutineToEdit({
-                        ...routineToEdit,
-                        goal: event.target.value,
-                      })
-                    }
-                    required
-                  />
-                  <button id="submit-button">Submit</button>
-                </>
-              )}
-            </>
-          );
-        })}
-      </form>
-    </div>
+    <>
+      <div className="edit-a-routine">
+        <div className="new-routine-form-title"> EDIT YOUR ROUTINE </div>
+        <form className="edit-routine-form" onSubmit={handleEdit}>
+          {routines.map((routine) => {
+            const { id } = routine;
+            return (
+              <>
+                {id == routineId && (
+                  <>
+                    <input
+                      id="name-input"
+                      type="text"
+                      value={routineToEdit.name}
+                      onChange={(event) =>
+                        setRoutineToEdit({
+                          ...routineToEdit,
+                          name: event.target.value,
+                        })
+                      }
+                      required
+                    />
+                    <input
+                      id="goal-input"
+                      type="text"
+                      placeholder="Goal*"
+                      value={routineToEdit.goal}
+                      onChange={(event) =>
+                        setRoutineToEdit({
+                          ...routineToEdit,
+                          goal: event.target.value,
+                        })
+                      }
+                      required
+                    />
+                    <button id="submit-button">Submit</button>
+                  </>
+                )}
+              </>
+            );
+          })}
+        </form>
+      </div>
+      <div>
+        <RoutineActivities
+          token={token}
+          activities={activities}
+          setActivities={setActivities}
+          routines={routines}
+          setRoutines={setRoutines}
+          routineToEdit={routineToEdit}
+        />
+      </div>
+    </>
   );
 };
 

@@ -10,4 +10,4 @@ export { default as SingleRoutine } from "./SingleRoutine";
 export { default as SingleActivity } from "./SingleActivity";
 export { default as EditRoutine } from "./EditRoutine";
 export { default as EditRoutineForm } from "./EditRoutineForm";
-export { default as DeleteRoutineActivity } from "./DeleteRoutineActivity"
+export { default as RoutineActivities } from "./RoutineActivities"

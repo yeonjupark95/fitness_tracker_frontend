@@ -1,4 +1,4 @@
-import { AddActivityToRoutine, DeleteRoutineActivity } from ".";
+import { AddActivityToRoutine } from ".";
 import EditRoutineForm from "./EditRoutineForm";
 import { useParams } from "react-router-dom";
 // for each routine which is owned by me I should
@@ -23,20 +23,14 @@ const EditRoutine = ({
         token={token}
         routines={routines}
         setRoutines={setRoutines}
+        activities={activities}
+        setActivities={setActivities}
         routineId={ROUTINE_ID}
       />
       <AddActivityToRoutine
         token={token}
         activities={activities}
         setActivities={setActivities}
-      />
-      <DeleteRoutineActivity
-        token={token}
-        activities={activities}
-        setActivities={setActivities}
-        routines={routines}
-        setRoutines={setRoutines}
-        routineIdParam={ROUTINE_ID}
       />
     </>
   );
