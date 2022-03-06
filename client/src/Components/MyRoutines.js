@@ -4,14 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import SingleActivity from "./SingleActivity";
 import Card from "react-bootstrap/Card";
-//be shown a form to create a new routine
-// the form should have text fields for name and goal
-// for each routine which is owned by me I should
-// be able to update the name and goal for the routine
-// be able to delete the entire routine
-// be able to add an activity to a routine via a small form which has a dropdown for all activities, an inputs for count and duration
-// be able to update the duration or count of any activity on the routine
-// be able to remove any activity from the routine
+
 const MyRoutines = ({ token, routines, setRoutines, user }) => {
   const [name, setName] = useState("");
   const [goal, setGoal] = useState("");
@@ -43,14 +36,17 @@ const MyRoutines = ({ token, routines, setRoutines, user }) => {
     try {
       const success = await deleteRoutine(routineIdToDelete, token);
       if (success) {
+        console.log("deleted routine", routines);
         const newRoutines = routines.filter(
-          (routine) => routine._id !== routineIdToDelete
+          (routine) => routine.id !== routineIdToDelete
         );
         setRoutines(newRoutines);
+        console.log("deleteRoutines", newRoutines);
       }
     } catch (error) {
       console.error(error);
     }
+    navigate("/routines");
   };
 
   useEffect(() => {
@@ -58,9 +54,12 @@ const MyRoutines = ({ token, routines, setRoutines, user }) => {
   }, [token]);
 
   return (
-    <>
-      <Card className="add-a-routine">
-        <Card.Header className="new-routine-form-title"> CREATE A ROUTINE </Card.Header>
+    <div className="my-routines">
+      <Card className="add-a-routine-card">
+        <Card.Header className="new-routine-form-title">
+          {" "}
+          CREATE A ROUTINE{" "}
+        </Card.Header>
         <form className="new-routine-form" onSubmit={handleRoutineSubmit}>
           <input
             id="name-input"
@@ -92,13 +91,18 @@ const MyRoutines = ({ token, routines, setRoutines, user }) => {
             const { id, isPublic, name, goal, creatorId, activities } = routine;
             if (user.id === creatorId) {
               return (
-                <Card>
+                <Card className="my-routines-routine-card">
                   <div className="my-routines-routine" key={id}>
-                    <Card.Header className="my-routines-routine-name">{name}</Card.Header>
-                    <div className="my-routines-routine-goal">{goal}</div>
-                    <div className="my-routines-routine-public">
+                    <Card.Header id="my-routines-routine-name">
+                      {name}
+                    </Card.Header>
+                    <div id="my-routines-routine-goal">{goal}</div>
+                    <div id="my-routines-routine-public">
                       {isPublic ? "Public" : "Only Me"}
                     </div>
+                  </div>
+                  <div id="my-routines-activities">
+                    <SingleActivity activities={activities} />
                   </div>
                   <div className="my-routines-delete">
                     <Button
@@ -122,15 +126,12 @@ const MyRoutines = ({ token, routines, setRoutines, user }) => {
                       EDIT ROUTINE
                     </Button>
                   </div>
-                  <div className="my-routines-activities">
-                    <SingleActivity activities={activities} />
-                  </div>
                 </Card>
               );
             }
           })}
       </div>
-    </>
+    </div>
   );
 };
 

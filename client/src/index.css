@@ -12,8 +12,11 @@ code {
     monospace;
 }
 
+@import url("https://fonts.googleapis.com/css2?family=Mukta&display=swap");
+
 h2 {
   font-size: 45px;
+  font-family: "Mukta", sans-serif;
 }
 
 h5 {
@@ -27,15 +30,40 @@ h5 {
 }
 
 .activities-name {
+  font-size: 30px;
+}
+
+.single-routine-card,
+.single-activity-card, .my-routines-routine-card {
+  width: 60%;
+  font-family: "Mukta", sans-serif;
+  margin: auto;
+  margin-bottom: 5rem;
+}
+
+.single-activity-card {
+  margin-bottom: 0rem;
+}
+
+.single-routine,
+.activities,
+.activities-wrapper,
+.single-activity,
+.routines,
+.routine-activities,
+.my-routines {
+  text-align: center;
+}
+
+.routine-activities {
+  line-height: 1rem;
+}
+
+#routines-name,
+#activities-name, #my-routines-routine-name {
   font-size: 20px;
 }
 
-.routines-wrapper {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-
-.single-routine-card{
-    width: 28rem;
+.add-a-routine-card {
+  margin-bottom: 2rem;
 }

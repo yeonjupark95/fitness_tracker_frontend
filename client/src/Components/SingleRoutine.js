@@ -2,7 +2,7 @@ import Card from "react-bootstrap/Card";
 
 const SingleRoutine = ({ routines }) => {
   return (
-    <>
+    <div className="single-routine">
       <h2>Routines</h2>
       <div className="routines-wrapper">
         {routines.length ? (
@@ -17,7 +17,7 @@ const SingleRoutine = ({ routines }) => {
                         {name} by {creatorName}{" "}
                       </Card.Header>
                       <Card.Title id="routines-goal">{goal}</Card.Title>
-                      <h5 id="routine-activities">Activities</h5>
+                      <div id="routine-activities-title">Activities</div>
                     </div>
                   )}
                   {activities.length ? (
@@ -55,7 +55,7 @@ const SingleRoutine = ({ routines }) => {
           <h5> There are no routines to display. </h5>
         )}
       </div>
-    </>
+    </div>
   );
 };
 

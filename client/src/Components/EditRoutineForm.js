@@ -49,6 +49,7 @@ const EditRoutineForm = ({
     });
     setRoutineToEdit(routineToEdit);
   }, [routines]);
+  
   if (!routineToEdit) {
     return <div>Loading...</div>;
   }
