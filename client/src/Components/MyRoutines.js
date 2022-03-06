@@ -60,7 +60,10 @@ const MyRoutines = ({ token, routines, setRoutines, user }) => {
   return (
     <>
       <Card className="add-a-routine">
-        <Card.Header className="new-routine-form-title"> CREATE A ROUTINE </Card.Header>
+        <Card.Header className="new-routine-form-title">
+          {" "}
+          CREATE A ROUTINE{" "}
+        </Card.Header>
         <form className="new-routine-form" onSubmit={handleRoutineSubmit}>
           <input
             id="name-input"
@@ -94,11 +97,16 @@ const MyRoutines = ({ token, routines, setRoutines, user }) => {
               return (
                 <Card>
                   <div className="my-routines-routine" key={id}>
-                    <Card.Header className="my-routines-routine-name">{name}</Card.Header>
+                    <Card.Header className="my-routines-routine-name">
+                      {name}
+                    </Card.Header>
                     <div className="my-routines-routine-goal">{goal}</div>
                     <div className="my-routines-routine-public">
                       {isPublic ? "Public" : "Only Me"}
                     </div>
+                  </div>
+                  <div className="my-routines-activities">
+                    <SingleActivity activities={activities} />
                   </div>
                   <div className="my-routines-delete">
                     <Button
@@ -121,9 +129,6 @@ const MyRoutines = ({ token, routines, setRoutines, user }) => {
                     >
                       EDIT ROUTINE
                     </Button>
-                  </div>
-                  <div className="my-routines-activities">
-                    <SingleActivity activities={activities} />
                   </div>
                 </Card>
               );

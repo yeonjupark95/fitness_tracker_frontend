@@ -47,7 +47,7 @@ const AddActivityToRoutine = ({ token, activities, setActivities }) => {
   return (
     <>
       <div className="add-a-routin-activity">
-        <div className="new-routine-activity-form-title"> ADD ACTIVITY TO </div>
+        <div className="new-routine-activity-form-title"> ADD ACTIVITY </div>
         <form
           className="new-routine-activity-form"
           onSubmit={handleRoutineActivitySubmit}
