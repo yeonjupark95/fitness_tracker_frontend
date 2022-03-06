@@ -1,6 +1,6 @@
 import Button from "react-bootstrap/Button";
 import { useState, useEffect } from "react";
-import { DeleteRoutineActivity } from ".";
+import { RoutineActivities } from ".";
 import { useNavigate } from "react-router-dom";
 import { editRoutine, fetchRoutines } from "../api";
 
@@ -89,7 +89,7 @@ const EditRoutineForm = ({
                       }
                       required
                     />
-                    <Button id="submit-button">Submit</Button>
+                    <button id="submit-button">Submit</button>
                   </>
                 )}
               </>
@@ -98,7 +98,7 @@ const EditRoutineForm = ({
         </form>
       </div>
       <div>
-        <DeleteRoutineActivity
+        <RoutineActivities
           token={token}
           activities={activities}
           setActivities={setActivities}
