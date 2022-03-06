@@ -33,9 +33,7 @@ const Activities = ({ token, activities, setActivities }) => {
           newDescription,
           token
         );
-        if (newActivity) {
-          setActivities([...activities, newActivity]);
-        }
+        setActivities([...activities, newActivity]);
       } catch (error) {
         console.error(error);
       }
