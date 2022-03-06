@@ -5,7 +5,7 @@ import SingleActivity from "./SingleActivity";
 const Activities = ({ token, activities, setActivities }) => {
   const [newName, setNewName] = useState("");
   const [newDescription, setNewDescription] = useState("");
-  const [errMsg, setErrMsg] = useState("");
+  const [msg, setMsg] = useState("");
   const [nameExist, setNameExist] = useState(false);
 
   const handleActivities = async () => {
@@ -20,22 +20,29 @@ const Activities = ({ token, activities, setActivities }) => {
 
   const handleActivitySubmit = async (event) => {
     event.preventDefault();
-    activities.map(({ name }) => {
-      if (newName === name) {
-        setNameExist(true);
-        setErrMsg("The activity with that name already exists!");
-      }
-    });
-    if (!nameExist) {
-      try {
-        const newActivity = await createActivity(
-          newName,
-          newDescription,
-          token
-        );
-        setActivities([...activities, newActivity]);
-      } catch (error) {
-        console.error(error);
+    for (let i = 0; i < activities.length; i++) {
+      const name = activities[i].name;
+      const id = activities[i].id;
+      console.log("activityid", id);
+      if (newName !== name) {
+        try {
+          const newActivity = await createActivity(
+            newName,
+            newDescription,
+            token
+          );
+          if (newActivity) {
+            setMsg("");
+            setActivities([...activities, newActivity]);
+          }
+          if (!newActivity) {
+            setNameExist(true);
+            setMsg("An activity with that name already exists!");
+          }
+        } catch (error) {
+          console.error(error);
+        }
+        break;
       }
     }
   };
@@ -50,7 +57,7 @@ const Activities = ({ token, activities, setActivities }) => {
         <div className="activities-wrapper">
           <div className="add-an-activity">
             <div className="new-activity-form-title"> CREATE AN ACTIVITY </div>
-            {nameExist && <div>{errMsg}</div>}
+            {nameExist && <div>{msg}</div>}
             <form className="new-activity-form" onSubmit={handleActivitySubmit}>
               <input
                 id="name-input"
