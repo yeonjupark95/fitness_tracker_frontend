@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { editRoutine, fetchRoutines } from "../api";
 
 const EditRoutineForm = ({ token, routines, setRoutines, routineId }) => {
-  const [routineToEdit, setRoutineToEdit] = useState([]);
+  const [routineToEdit, setRoutineToEdit] = useState(null);
+  const blankRoutine = { name: "", goal: "" };
   const navigate = useNavigate();
 
   const handleRoutines = async () => {
@@ -16,7 +17,10 @@ const EditRoutineForm = ({ token, routines, setRoutines, routineId }) => {
       console.error(error);
     }
   };
-  console.log("routines", routines);
+
+  useEffect(() => {
+    handleRoutines();
+  }, [token]);
 
   const handleEdit = async (event) => {
     try {
@@ -31,10 +35,12 @@ const EditRoutineForm = ({ token, routines, setRoutines, routineId }) => {
   };
 
   useEffect(() => {
-    handleRoutines();
-  }, [token]);
+    const routineToEdit = routines.find((routine) => {
+      return routine.id === routineId * 1;
+    });
+    setRoutineToEdit(routineToEdit);
+  }, [routines]);
 
-  console.log("routineID", routineId);
   return (
     <div className="edit-a-routine">
       <div className="new-routine-form-title"> EDIT YOUR ROUTINE </div>

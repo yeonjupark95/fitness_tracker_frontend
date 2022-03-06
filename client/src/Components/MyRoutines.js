@@ -3,6 +3,7 @@ import { createRoutine, deleteRoutine, fetchRoutines } from "../api";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import SingleActivity from "./SingleActivity";
+import Card from "react-bootstrap/Card";
 //be shown a form to create a new routine
 // the form should have text fields for name and goal
 // for each routine which is owned by me I should
@@ -58,8 +59,8 @@ const MyRoutines = ({ token, routines, setRoutines, user }) => {
 
   return (
     <>
-      <div className="add-a-routine">
-        <div className="new-routine-form-title"> CREATE A ROUTINE </div>
+      <Card className="add-a-routine">
+        <Card.Header className="new-routine-form-title"> CREATE A ROUTINE </Card.Header>
         <form className="new-routine-form" onSubmit={handleRoutineSubmit}>
           <input
             id="name-input"
@@ -84,28 +85,24 @@ const MyRoutines = ({ token, routines, setRoutines, user }) => {
           <label htmlFor="checkbox">Public</label>
           <button id="create-button">CREATE</button>
         </form>
-      </div>
+      </Card>
       <div className="my-routines">
         {routines.length > 0 &&
           routines.map((routine) => {
-            const { id, isPublic, name, goal, creatorId, activities } =
-              routine;
+            const { id, isPublic, name, goal, creatorId, activities } = routine;
             if (user.id === creatorId) {
               return (
-                <>
+                <Card>
                   <div className="my-routines-routine" key={id}>
-                    <div className="my-routines-routine-name">{name}</div>
+                    <Card.Header className="my-routines-routine-name">{name}</Card.Header>
                     <div className="my-routines-routine-goal">{goal}</div>
                     <div className="my-routines-routine-public">
                       {isPublic ? "Public" : "Only Me"}
                     </div>
                   </div>
-                  <div className="my-routines-activities">
-                    <SingleActivity activities={activities}/>
-                  </div>
                   <div className="my-routines-delete">
                     <Button
-                      id="delete-button"
+                      id="delete-routine-button"
                       variant="dark"
                       onClick={() => {
                         handleRoutineDelete(id);
@@ -116,7 +113,7 @@ const MyRoutines = ({ token, routines, setRoutines, user }) => {
                   </div>
                   <div className="my-routines-edit">
                     <Button
-                      id="edit-button"
+                      id="edit-routine-button"
                       variant="dark"
                       onClick={() => {
                         navigate(`/routines/${id}/edit`);
@@ -125,7 +122,10 @@ const MyRoutines = ({ token, routines, setRoutines, user }) => {
                       EDIT ROUTINE
                     </Button>
                   </div>
-                </>
+                  <div className="my-routines-activities">
+                    <SingleActivity activities={activities} />
+                  </div>
+                </Card>
               );
             }
           })}
