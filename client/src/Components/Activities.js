@@ -3,12 +3,10 @@ import { useState, useEffect } from "react";
 import SingleActivity from "./SingleActivity";
 
 const Activities = ({ token, activities, setActivities }) => {
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [newName, setNewName] = useState("");
+  const [newDescription, setNewDescription] = useState("");
+  const [errMsg, setErrMsg] = useState("");
+  const [nameExist, setNameExist] = useState(false);
 
   const handleActivities = async () => {
     try {
@@ -21,13 +19,26 @@ const Activities = ({ token, activities, setActivities }) => {
   };
 
   const handleActivitySubmit = async (event) => {
-    try {
-      event.preventDefault();
-      const newActivity = await createActivity(name, description, token);
-      console.log("newActivity", newActivity);
-      setActivities([...activities, newActivity]);
-    } catch (error) {
-      console.error(error);
+    event.preventDefault();
+    activities.map(({ name }) => {
+      if (newName === name) {
+        setNameExist(true);
+        setErrMsg("The activity with that name already exists!");
+      }
+    });
+    if (!nameExist) {
+      try {
+        const newActivity = await createActivity(
+          newName,
+          newDescription,
+          token
+        );
+        if (newActivity) {
+          setActivities([...activities, newActivity]);
+        }
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
@@ -41,19 +52,20 @@ const Activities = ({ token, activities, setActivities }) => {
         <div className="activities-wrapper">
           <div className="add-an-activity">
             <div className="new-activity-form-title"> CREATE AN ACTIVITY </div>
+            {nameExist && <div>{errMsg}</div>}
             <form className="new-activity-form" onSubmit={handleActivitySubmit}>
               <input
                 id="name-input"
                 type="text"
                 placeholder="Name*"
-                onChange={(event) => setName(event.target.value)}
+                onChange={(event) => setNewName(event.target.value)}
                 required
               />
               <input
                 id="description-input"
                 type="text"
                 placeholder="Description*"
-                onChange={(event) => setDescription(event.target.value)}
+                onChange={(event) => setNewDescription(event.target.value)}
                 required
               />
               <button id="create-button">CREATE</button>
