@@ -54,8 +54,8 @@ const MyRoutines = ({ token, routines, setRoutines, user }) => {
   }, [token]);
 
   return (
-    <>
-      <Card className="add-a-routine">
+    <div className="my-routines">
+      <Card className="add-a-routine-card">
         <Card.Header className="new-routine-form-title">
           {" "}
           CREATE A ROUTINE{" "}
@@ -91,17 +91,17 @@ const MyRoutines = ({ token, routines, setRoutines, user }) => {
             const { id, isPublic, name, goal, creatorId, activities } = routine;
             if (user.id === creatorId) {
               return (
-                <Card>
+                <Card className="my-routines-routine-card">
                   <div className="my-routines-routine" key={id}>
-                    <Card.Header className="my-routines-routine-name">
+                    <Card.Header id="my-routines-routine-name">
                       {name}
                     </Card.Header>
-                    <div className="my-routines-routine-goal">{goal}</div>
-                    <div className="my-routines-routine-public">
+                    <div id="my-routines-routine-goal">{goal}</div>
+                    <div id="my-routines-routine-public">
                       {isPublic ? "Public" : "Only Me"}
                     </div>
                   </div>
-                  <div className="my-routines-activities">
+                  <div id="my-routines-activities">
                     <SingleActivity activities={activities} />
                   </div>
                   <div className="my-routines-delete">
@@ -131,7 +131,7 @@ const MyRoutines = ({ token, routines, setRoutines, user }) => {
             }
           })}
       </div>
-    </>
+    </div>
   );
 };
 

@@ -8,23 +8,14 @@ const SingleActivity = ({ activities }) => {
           const { id, name, description, duration, count } = activity;
           return (
             <>
-              <Card className="single-activity-card" key={id}>
-                <Card.Header id="activities-name"> {name} </Card.Header>
-                <Card.Title id="activities-description">
-                  {" "}
-                  {description}{" "}
-                </Card.Title>
-              </Card>
+              <div className="single-activity-card" key={id}>
+                <div id="activities-name"> {name} </div>
+                <div id="activities-description"> {description} </div>
+              </div>
               {duration && (
-                <Card.Text id="routine-activities-duration">
-                  Duration: {duration}
-                </Card.Text>
+                <div id="routine-activities-duration">Duration: {duration}</div>
               )}
-              {count && (
-                <Card.Text id="routine-activities-count">
-                  Count: {count}
-                </Card.Text>
-              )}
+              {count && <div id="routine-activities-count">Count: {count}</div>}
             </>
           );
         })

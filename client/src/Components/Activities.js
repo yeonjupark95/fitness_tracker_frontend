@@ -5,6 +5,10 @@ import SingleActivity from "./SingleActivity";
 const Activities = ({ token, activities, setActivities }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const handleActivities = async () => {
     try {
@@ -32,9 +36,9 @@ const Activities = ({ token, activities, setActivities }) => {
   }, [token]);
 
   return (
-    <div className = "activities">
+    <div className="activities">
       {token && (
-        <div className = "activities-wrapper">
+        <div className="activities-wrapper">
           <div className="add-an-activity">
             <div className="new-activity-form-title"> CREATE AN ACTIVITY </div>
             <form className="new-activity-form" onSubmit={handleActivitySubmit}>
