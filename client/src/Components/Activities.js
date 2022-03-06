@@ -1,8 +1,6 @@
 import { fetchActivities, createActivity } from "../api";
 import { useState, useEffect } from "react";
 import SingleActivity from "./SingleActivity";
-import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
 
 const Activities = ({ token, activities, setActivities }) => {
   const [newName, setNewName] = useState("");
@@ -23,24 +21,21 @@ const Activities = ({ token, activities, setActivities }) => {
   const handleActivitySubmit = async (event) => {
     event.preventDefault();
     activities.map(({ name }) => {
-      console.log("name, newName", name, newName);
       if (newName === name) {
         setNameExist(true);
-        setErrMsg("This activity already exists");
-        console.log("nameExist inside if", nameExist);
+        setErrMsg("The activity with that name already exists!");
       }
     });
-    console.log("nameExist outside map", nameExist);
     if (!nameExist) {
       try {
-        console.log("nameExist", nameExist);
         const newActivity = await createActivity(
           newName,
           newDescription,
           token
         );
-        console.log("newActivity", newActivity);
-        setActivities([...activities, newActivity]);
+        if (newActivity) {
+          setActivities([...activities, newActivity]);
+        }
       } catch (error) {
         console.error(error);
       }
@@ -51,17 +46,13 @@ const Activities = ({ token, activities, setActivities }) => {
     handleActivities();
   }, [token]);
 
-  useEffect(() => {
-    handleActivitySubmit();
-  }, [nameExist]);
-
   return (
     <div className="activities">
       {token && (
         <div className="activities-wrapper">
           <div className="add-an-activity">
             <div className="new-activity-form-title"> CREATE AN ACTIVITY </div>
-            {nameExist ? <div>{errMsg}</div> : null}
+            {nameExist && <div>{errMsg}</div>}
             <form className="new-activity-form" onSubmit={handleActivitySubmit}>
               <input
                 id="name-input"
