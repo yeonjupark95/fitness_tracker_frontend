@@ -42,38 +42,7 @@ const DeleteRoutineActivity = ({
     <div className="edit-a-routine-activity">
       <div className="new-routine-activity-form-title"> ACTIVITIES </div>
       <div>
-        {routines.map(({ activities }) => {
-          const { name, description, duration, count, routineId} = activities;
-          console.log("activities inside routines", activities)
-          console.log("routineId", routineId);
-          console.log("name", name);
-          return (
-            <>
-              {routineId == routineIdParam && (
-                <>
-                  <div className="activities" key={routineId}>
-                    <div className="activities-name"> {name} </div>
-                    <div className="activities-description">
-                      {" "}
-                      {description}{" "}
-                    </div>
-                  </div>
-                  {duration && (
-                    <div className="routine-activities-duration">
-                      Duration: {duration}
-                    </div>
-                  )}
-                  {count && (
-                    <div className="routine-activities-count">
-                      Count: {count}
-                    </div>
-                  )}
-                  )
-                </>
-              )}
-            </>
-          );
-        })}
+        
       </div>
     </div>
   );
