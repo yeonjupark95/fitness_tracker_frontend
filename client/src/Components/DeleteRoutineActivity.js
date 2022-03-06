@@ -1,7 +1,5 @@
-import { SingleActivity } from ".";
 import { deleteRoutineActivity, fetchRoutines } from "../api";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
 const DeleteRoutineActivity = ({
   routines,
@@ -44,10 +42,11 @@ const DeleteRoutineActivity = ({
     <div className="edit-a-routine-activity">
       <div className="new-routine-activity-form-title"> ACTIVITIES </div>
       <div>
-        {routines.map(({activities}) => {
-          const { name, description, duration, count, routineId } = activities;
+        {routines.map(({ activities }) => {
+          const { name, description, duration, count, routineId} = activities;
+          console.log("activities inside routines", activities)
           console.log("routineId", routineId);
-          console.log("name", name)
+          console.log("name", name);
           return (
             <>
               {routineId == routineIdParam && (

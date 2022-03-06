@@ -225,9 +225,9 @@ export const editRoutine = async (id, routine, token) => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({
-        routine,
-      }),
+      body: JSON.stringify(
+        routine
+      ),
     });
     const editRoutine = await response.json();
     console.log("you edited Routine", editRoutine);
