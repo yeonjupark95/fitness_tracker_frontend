@@ -15,8 +15,6 @@ const EditRoutineForm = ({
   const [routineToEdit, setRoutineToEdit] = useState(null);
   const navigate = useNavigate();
 
-  console.log("routinetoEdit", routineToEdit);
-
   const handleRoutines = async () => {
     try {
       const routines = await fetchRoutines();
@@ -35,7 +33,6 @@ const EditRoutineForm = ({
     event.preventDefault();
     try {
       const newRoutine = await editRoutine(routineId, routineToEdit, token);
-      console.log("you clicked handle Edit");
       setRoutineToEdit(newRoutine);
       navigate("/myroutines");
     } catch (error) {
