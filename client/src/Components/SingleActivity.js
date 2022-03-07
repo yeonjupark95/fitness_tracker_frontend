@@ -9,7 +9,7 @@ const SingleActivity = ({ activities }) => {
           const { id, name, description, duration, count } = activity;
           return (
             <>
-              <Card className="single-activity-card" key={id}>
+              <Card className="single-activity-card" border="secondary" key={id}>
               <Card.Header id="activities-name"> {name} </Card.Header>
                 <Card.Text id="activities-description"> {description} </Card.Text>
                 </Card>

@@ -51,18 +51,20 @@ const AccountForm = ({ setToken, setUser }) => {
     <>
       <div>
         {errors &&<div>{errors}</div>}
-        <h1>{accountTitle}</h1>
+        <h1 className = "Login-Register-title">{accountTitle}</h1>
         <form onSubmit={handleSubmit}>
-          <input
+          <input className = "Username-box"
             required
+            Placeholder="Username"
             label="Username"
             value={username}
             onChange={(event) => {
               setUsername(event.target.value);
             }}
           />
-          <input
+          <input className = "Password-box"
             required
+            Placeholder="Password"
             label="Password"
             type="password"
             variant="outlined"
@@ -71,8 +73,8 @@ const AccountForm = ({ setToken, setUser }) => {
               setPassword(event.target.value);
             }}
           />
-          <button type="submit">{accountTitle}</button>
-          <div>
+          <button className="login-register-button" type="submit">{accountTitle}</button>
+          <div className="login-register-text">
             {method === "login" ? (
               <Link to={`/account/register`}>
                 Don't have an account? Sign Up
