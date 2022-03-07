@@ -38,8 +38,6 @@ const AddActivityToRoutine = ({ token, activities, setActivities }) => {
     }
   };
 
-  console.log("activities", activities);
-
   useEffect(() => {
     handleActivities();
   }, [token]);

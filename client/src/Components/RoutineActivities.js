@@ -1,44 +1,13 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { deleteRoutineActivity, editRoutineActivity } from "../api";
 import React from "react";
 
-const RoutineActivities = ({ routineToEdit, setActivities, setRoutines, token }) => {
+const RoutineActivities = ({ routineToEdit }) => {
   const navigate = useNavigate();
-  const [count, setCount] = useState()
-
   const routineActivities = routineToEdit.activities;
   if (!routineActivities) {
     navigate("/myroutines");
     return <div>Loading...</div>;
   }
-
-  console.log("routineToEdit", routineToEdit);
-  console.log("routineActivities", routineActivities);
-  console.log("RAtoken", token);
-
-  const handleRADelete = async (routineActivityId) => {
-    try {
-      const success = await deleteRoutineActivity(token, routineActivityId);
-      if (success) {
-        const newRoutineActivities = routineActivities.filter(
-          (routineActivity) => routineActivity.id !== routineActivityId
-        );
-        setActivities(newRoutineActivities);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const handleRAEdit = async (routineActivityId) => {
-    try {
-      const updatedRA = {};
-      
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   return (
     <div className="edit-a-routine-activity">
@@ -52,20 +21,6 @@ const RoutineActivities = ({ routineToEdit, setActivities, setRoutines, token })
               <div>{description} </div>
               <div>Count: {count}</div>
               <div>Duration: {duration}</div>
-              <button
-                onClick={() => {
-                  handleRADelete(id);
-                }}
-              >
-                Edit
-              </button>
-              <button
-                onClick={() => {
-                  handleRADelete(id);
-                }}
-              >
-                Delete
-              </button>
             </>
           );
         })
