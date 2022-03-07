@@ -7,7 +7,6 @@ const Routines = ({ token, routines, setRoutines }) => {
     try {
       const routines = await fetchRoutines();
       setRoutines(routines);
-      console.log("routines", routines);
     } catch (error) {
       console.error(error);
     }

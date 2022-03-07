@@ -23,7 +23,6 @@ const MyRoutines = ({ token, routines, setRoutines, user }) => {
   const handleRoutineSubmit = async (event) => {
     try {
       event.preventDefault();
-      console.log("myRoutines token", token);
       const newRoutines = await createRoutine(name, goal, isPublic, token);
       console.log("newRoutine", newRoutines);
       setRoutines([...routines, newRoutines]);
@@ -36,12 +35,10 @@ const MyRoutines = ({ token, routines, setRoutines, user }) => {
     try {
       const success = await deleteRoutine(routineIdToDelete, token);
       if (success) {
-        console.log("deleted routine", routines);
         const newRoutines = routines.filter(
           (routine) => routine.id !== routineIdToDelete
         );
         setRoutines(newRoutines);
-        console.log("deleteRoutines", newRoutines);
       }
     } catch (error) {
       console.error(error);
