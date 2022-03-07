@@ -1,4 +1,5 @@
 import Card from "react-bootstrap/Card";
+
 const SingleActivity = ({ activities }) => {
   return (
     <div className="activities-wrapper">
@@ -8,10 +9,10 @@ const SingleActivity = ({ activities }) => {
           const { id, name, description, duration, count } = activity;
           return (
             <>
-              <div className="single-activity-card" key={id}>
-                <div id="activities-name"> {name} </div>
-                <div id="activities-description"> {description} </div>
-              </div>
+              <Card className="single-activity-card" key={id}>
+              <Card.Header id="activities-name"> {name} </Card.Header>
+                <Card.Text id="activities-description"> {description} </Card.Text>
+                </Card>
               {duration && (
                 <div id="routine-activities-duration">Duration: {duration}</div>
               )}

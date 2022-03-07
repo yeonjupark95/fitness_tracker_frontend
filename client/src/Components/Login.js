@@ -13,7 +13,6 @@ const Login = ({ token }) => {
       console.log("token", token);
     } catch (error) {
       console.dir(error);
-      // setError(error.response.data.message)
     }
   };
 

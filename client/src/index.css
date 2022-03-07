@@ -72,3 +72,19 @@ h5 {
   font-size: 25px;
   font-weight: 600;
 }
+
+.activities {
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.single-activity-card {
+  width: 60%;
+  font-family: "Mukta", sans-serif;
+  margin: auto;
+  margin-bottom: 5rem;
+}
+
+.login-form {
+  text-align: center;
+}

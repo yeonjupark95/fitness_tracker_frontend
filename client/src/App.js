@@ -35,7 +35,7 @@ const App = () => {
   const handleLogOut = () => {
     setToken("");
     localStorage.removeItem("token");
-    navigate("/");
+    navigate("/routines");
   };
 
   useEffect(() => {
